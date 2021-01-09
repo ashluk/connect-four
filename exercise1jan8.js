@@ -1,4 +1,4 @@
-var i = "hello";
+//exercise 1
 
 function logType() {
     if (typeof i === "number") {
@@ -25,20 +25,29 @@ function logType() {
 }
 logType();
 
+//exercise 2
+
 var a = {
     Berlin: "Germany",
     Paris: "France",
     "New York": "USA",
 };
-var b = {
-    Germany: "Berlin",
-    France: "Paris",
-    USA: "New York",
-};
+var b = {};
 
-for (var Berlin in a) {
-    console.log(Berlin);
+for (var key in a) {
+    b["Germany"] = a[key];
+    b["France"] = a[key];
+    b["USA"] = a[key];
+    {
+        console.log(key, b[key]);
+    }
 }
+
+for (var key in a) {
+    console.log(key, a[key]);
+}
+
+//exercise 3
 
 var myArray = [];
 for (var c = 10; c > 0; c--) {
