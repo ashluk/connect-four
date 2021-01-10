@@ -3,24 +3,30 @@
 }
 
 body {
-    background-color: rgb(46, 40, 40);
-    color: white;
+    background-color: rgb(168, 164, 164);
+    color: rgb(2, 2, 2);
 }
 header {
     padding: 10px;
-    margin: 20px;
-    background-color: rgb(102, 82, 82);
-    border: 1px dashed;
+    margin: 0px;
+    background-color: rgb(252, 250, 250);
     height: 70px;
 }
 
 #logo {
     height: 50px;
     width: 50px;
-    background-color: rgb(238, 18, 172);
+    float: left;
 }
 #menu {
     height: 50px;
     width: 50px;
-    background-color: rgb(238, 135, 18);
+    float: right;
+}
+img {
+    height: 50px;
+    position: fixed;
+}
+#spiced {
+    position: relative;
 }

@@ -35,16 +35,7 @@ var a = {
 var b = {};
 
 for (var key in a) {
-    b["Germany"] = a[key];
-    b["France"] = a[key];
-    b["USA"] = a[key];
-    {
-        console.log(key, b[key]);
-    }
-}
-
-for (var key in a) {
-    console.log(key, a[key]);
+    b[a[key]] = key;
 }
 
 //exercise 3
