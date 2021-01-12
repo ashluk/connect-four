@@ -10,21 +10,30 @@ If the first parameter is an array, it should loop over the array's elements
 and call the callback for each one. The array element should be the first 
 parameter passed to the callback and the index should be the second.*/
 
-var namesArr = ["david", "greg", "sam", "chris"];
-
-function callback(myArr) {
-    for (var i = 0; i < myArr.length; i++);
-    console.log("this is:", myArr);
-}
-
-function each(myArr, callback) {
-    console.log(callback);
-
-    for (var i = 0; i < myArr.length; i++) {
-        return callback(myArr[i]);
+function each(arrOrObj, callback) {
+    if (Array.isArray(arrOrObj) === true) {
+        for (var i = 0; i < arrOrObj.length; i++);
+        return callback(arrOrObj, i);
+    } else {
+        for (var key in arrOrObj) {
+            return callback(arrOrObj[key], key);
+        }
     }
 }
-each(namesArr, callback);
+
+each(
+    {
+        a: 1,
+        b: 2,
+    },
+    function (val, name) {
+        console.log("The value of " + name + " is " + val);
+    }
+);
+
+each(["a", "b"], function (val, idx) {
+    console.log("The value of item " + idx + " is " + val);
+});
 
 /* Write a function that takes an array as a parameter and returns a new 
 array containing all of the items that are in the array that was passed in 
