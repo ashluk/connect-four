@@ -3,12 +3,12 @@
 }
 
 body {
-    background-color: rgb(168, 164, 164);
+    background-color: rgb(250, 245, 245);
     color: rgb(2, 2, 2);
 }
 header {
+    position: relative;
     padding: 10px;
-    margin: 0px;
     background-color: rgb(252, 250, 250);
     height: 70px;
 }
@@ -29,4 +29,8 @@ img {
 }
 #spiced {
     position: relative;
+}
+img[alt="spices"] {
+    height: 99%;
+    width: 99%;
 }
