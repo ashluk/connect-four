@@ -19,6 +19,4 @@ for (var i = 0; i < newNumbers; i++);
 
 var newObj = new Object();
 
-newObj.color;
-
-console.log(numbers);
+newObj.color = "yellow";
