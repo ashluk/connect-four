@@ -7,32 +7,19 @@ as a parameter.
 Instances of Square should also have a getArea method but you should not rewrite the getArea function you wrote 
 for Rectangle. Square instances should use the same getArea method that Rectangle instances do. */
 
-function Object(name, w, h) {
-    this.name = name;
+function Rectangle(w, h) {
     this.width = w;
     this.height = h;
-    this.getArea = function () {
-        return w * h;
-    };
-}
-/*function Rectangle(w, h) {
-    this.width = w;
-    this.height = h;
-    this.getArea = function () {
-        return (this.width * this.height);
+    this.getArea = function (w, h) {
+        if (w && h) {
+            console.log(w * h);
+        } else if (w && !h) {
+            console.log(w * w);
+        }
     };
 }
 
-function Square(n) {
-    this.width = n;
-    this.height = n;
-}*/
-
-var p1 = new Object("Rectangle", 5, 6);
-var p2 = new Object("Square", 5);
-
-console.log(p1);
-console.log(p2);
+var Square = new Rectangle();
 
 /* Write a function called invertCase that expects a string as a parameter. 
 
@@ -43,3 +30,17 @@ Uppercase characters should become lowercase and lowercase letters should become
 
 Characters that are not alphabetic should not change. The toUpperCase and toLowerCase methods that all strings have 
 will come in handy here. */
+
+function invertCase(string) {
+    var newString = "";
+    for (var i in string) {
+        if (string[i] === string[i].toLowerCase()) {
+            newString = newString + string[i].toUpperCase();
+        } else if (string[i] === string[i].toUpperCase()) {
+            newString = newString + string[i].toLowerCase();
+        }
+    }
+    console.log(newString);
+}
+
+invertCase("ABdd2C");
