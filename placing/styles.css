@@ -3,24 +3,14 @@
 }
 
 body {
-    background-color: rgb(250, 245, 245);
+    background-color: rgb(255, 255, 255);
     color: rgb(255, 251, 251);
 }
 header {
     position: relative;
     padding: 10px;
-    background-color: rgb(252, 250, 250);
+    background-color: rgb(255, 255, 255);
     height: 70px;
-}
-
-h1 {
-    font-style: italic;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-weight: lighter;
-    font-size: 40px;
-    position: relative;
-    text-align: center;
-    padding: 200px;
 }
 
 #logo {
@@ -33,37 +23,114 @@ h1 {
     width: 50px;
     float: right;
 }
-button {
+.main-image {
+    position: relative;
+}
+.namebutton {
     position: absolute;
-    height: 38px;
-    width: 200px;
-    left: 43%;
-    top: 51%;
+    top: 200px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-style: italic;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: lighter;
+    font-size: 40px;
+    text-align: center;
+}
+
+h3 {
+    margin: 0px;
+    position: absolute;
+}
+
+#Best {
+    position: absolute;
+
+    top: 20%;
+    left: 20%;
+}
+#Reliable {
+    position: absolute;
+
+    top: 20%;
+    left: 60%;
+}
+
+#Acquired {
+    position: absolute;
+
+    bottom: 20%;
+    left: 20%;
+}
+
+#No-limit {
+    position: absolute;
+    bottom: 20%;
+    left: 59%;
+}
+
+blockquote {
+    font-size: 13px;
+    text-indent: 12px;
+}
+
+button {
+    height: 8%;
+    width: 20%;
     border-radius: 20px;
     background-color: yellow;
     text-align: center;
     border-color: orange;
     border-width: 5px;
     font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 18px;
     color: orange;
-    z-index: 1;
 }
+
 .container {
+    position: relative;
     width: 100%;
-    height: 400px;
+    height: 200px;
     background-color: rgb(117, 114, 114);
-    margin: 0vw;
-    position: relative;
 }
-img {
+img[alt="spiced"] {
     height: 50px;
-    position: relative;
+    position: absolute;
+    top: 10%;
+    left: 0%;
+}
+img[alt="cat"] {
+    height: 50px;
+    position: absolute;
+    top: 0%;
+    left: -15%;
+}
+img[alt="swim"] {
+    height: 50px;
+    position: absolute;
+    top: 0%;
+    left: -11%;
+}
+img[alt="world"] {
+    height: 50px;
+    position: absolute;
+    top: 0%;
+    left: -15%;
+}
+img[alt="columns"] {
+    height: 50px;
+    position: absolute;
+    top: 0%;
+
+    left: -15%;
 }
 
 img[alt="spices"] {
-    left: 0px;
-    height: 80%;
-    width: 99%;
+    height: auto;
+    vertical-align: bottom;
+    width: 100%;
     position: relative;
 }
