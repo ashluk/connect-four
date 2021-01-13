@@ -12,13 +12,14 @@ parameter passed to the callback and the index should be the second.*/
 
 function each(arrOrObj, callback) {
     if (Array.isArray(arrOrObj) === true) {
-        for (var i = 0; i < arrOrObj.length; i++);
-        return callback(arrOrObj, i);
-    } else {
+        for (var i = 0; i < arrOrObj.length; i++) {
+        callback(arrOrObj, i);
+        }else{
         for (var key in arrOrObj) {
-            return callback(arrOrObj[key], key);
-        }
+            callback(arrOrObj[key], key);
+        }   
     }
+}
 }
 
 each(
