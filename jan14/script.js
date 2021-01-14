@@ -30,3 +30,17 @@ whichClass(".scottish-text");
  loaded page.
  That element should have fixed position, z-index of 2147483647, left of 20px, 
  top of 100px, font-size of 200px, and contain the text 'AWESOME'.*/
+
+function create() {
+    var bod = document.createElement("Body");
+    bod.innerText = "AWESOME";
+    bod.style.fontSize = "200px";
+    bod.style.fontFamily = "Impact";
+    bod.style.color = "hotpink";
+    bod.style.position = "fixed";
+    bod.style.left = "20px";
+    bod.style.top = "100px";
+    bod.style.zIndex = "2147483647";
+    document.body.append(bod);
+}
+create();
