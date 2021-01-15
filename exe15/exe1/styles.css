@@ -1,0 +1,8 @@
+#movingdiv {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background-color: rgb(247, 71, 71);
+    top: 50px;
+    left: 50px;
+}

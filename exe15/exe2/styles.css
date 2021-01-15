@@ -6,8 +6,8 @@ textarea,
     top: 30%;
     left: 29%;
     font-size: medium;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
     padding: 10px;
     line-height: 10px;
-    border-radius: 3px;
-    border: 3px solid greenyellow;
+    border: 5px solid rgb(250, 3, 56);
 }
