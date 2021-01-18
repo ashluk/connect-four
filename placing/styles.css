@@ -117,14 +117,14 @@ header img[alt="spiced"] {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 80%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
 }
 .side-nav {
     position: absolute;
     top: 0%;
-    left: 100%;
+    left: 80%;
     bottom: 0%;
     height: 100%;
     width: 100%;
@@ -136,14 +136,23 @@ header img[alt="spiced"] {
 .side-nav #options {
     text-align: left;
     position: relative;
-    padding: 0 30px 0 10px;
+    top: 5%;
+    padding: 0 30px 0 20px;
     margin: 10px;
     font-size: 20px;
 }
+.side-nav #x {
+    position: absolute;
+    left: 18%;
+    font-size: 20px;
+}
+
 .on {
     transition-property: transform;
     transition-duration: 2s;
     transform: translateX(200%);
+    position: absolute;
+    left: 80%;
 }
 
 @media (max-width: 500px) {
@@ -188,53 +197,3 @@ header img[alt="spiced"] {
         background-color: rgba(0, 0, 0, 0.7);
     }
 }
-
-/*.container img[alt="cat"] {
-    height: 50px;
-    position: absolute;
-    top: 0%;
-    left: -15%;
-}
-.container img[alt="swim"] {
-    height: 50px;
-    position: absolute;
-    top: 0%;
-    left: -11%;
-}
-.container img[alt="world"] {
-    height: 50px;
-    position: absolute;
-}
-.container img[alt="columns"] {
-    height: 50px;
-    position: absolute;
-    top: 0%;
-
-    left: -15%;
-}
-*/
-/*.container #Best {
-    position: absolute;
-
-    top: 20%;
-    left: 20%;
-}
-.container #Reliable {
-    position: absolute;
-
-    top: 20%;
-    left: 60%;
-}
-
-.container #Acquired {
-    position: absolute;
-
-    bottom: 20%;
-    left: 20%;
-}
-
-.container #No-limit {
-    position: absolute;
-    bottom: 20%;
-    left: 60%;
-}*/
