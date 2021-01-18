@@ -21,7 +21,7 @@ function moveHeadlines() {
         headlines.appendChild(links[0]);
     }
     headlines.style.left = left + "px";
-    requestAnimationFrame(moveHeadlines);
+    requestId = requestAnimationFrame(moveHeadlines);
 }
 moveHeadlines();
 
@@ -30,20 +30,24 @@ for (var i = 0; i < links.length; i++) {
     links[i].addEventListener("mouseenter", function (e) {
         console.log("e.target mouse enter:", e.target);
         //e target refers to the clicked element
-        e.target.style.font = "hotpink";
+        e.target.style.color = "blue";
+        e.target.style.textDecoration = "underline";
         cancelAnimationFrame(requestId);
     });
     links[i].addEventListener("mouseleave", function (e) {
         console.log("e.target mouse leave: ", e.target);
-        headlines.style.left = left + "px";
-        requestAnimationFrame(moveHeadlines);
+        e.target.style.color = "black";
+        e.target.style.textDecoration = "none";
+
+        //headlines.style.left = left + "px";
+        requestId = requestAnimationFrame(moveHeadlines);
     });
 }
 
-function checkHeadlines() {
+/*function checkHeadlines() {
     requestId = requestAnimationFrame(moveHeadlines);
     return requestId;
     //console.log("requestId: ", requestId);
 }
 
-checkHeadlines();
+checkHeadlines();*/
