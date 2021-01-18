@@ -3,6 +3,8 @@
 }
 
 body {
+    margin: 0%;
+    font-family: Georgia;
     background-color: rgb(255, 255, 255);
     color: rgb(255, 251, 251);
 }
@@ -13,20 +15,30 @@ header {
     height: 70px;
 }
 
-#logo {
+header #logo {
     height: 50px;
     width: 50px;
     float: left;
 }
-#menu {
+header #menu {
     height: 50px;
     width: 50px;
     float: right;
 }
+header img[alt="spiced"] {
+    height: 40px;
+    margin: 5px 0 0 -5px;
+}
 .main-image {
     position: relative;
 }
-.namebutton {
+.main-image img[alt="spices"] {
+    height: auto;
+    vertical-align: bottom;
+    width: 100%;
+    position: relative;
+}
+.main-image .namebutton {
     position: absolute;
     top: 200px;
     left: 0;
@@ -34,51 +46,7 @@ header {
     text-align: center;
 }
 
-h1 {
-    font-style: italic;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-weight: lighter;
-    font-size: 40px;
-    text-align: center;
-}
-
-h3 {
-    margin: 0px;
-    position: absolute;
-}
-
-#Best {
-    position: absolute;
-
-    top: 20%;
-    left: 20%;
-}
-#Reliable {
-    position: absolute;
-
-    top: 20%;
-    left: 60%;
-}
-
-#Acquired {
-    position: absolute;
-
-    bottom: 20%;
-    left: 20%;
-}
-
-#No-limit {
-    position: absolute;
-    bottom: 20%;
-    left: 59%;
-}
-
-blockquote {
-    font-size: 13px;
-    text-indent: 12px;
-}
-
-button {
+.main-image button {
     height: 8%;
     width: 20%;
     border-radius: 20px;
@@ -90,47 +58,183 @@ button {
     color: orange;
 }
 
+.main-image h1 {
+    /*position: absolute;
+    top: 50%;
+    width: 100%;*/
+    font-style: italic;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: lighter;
+    font-size: 40px;
+
+    text-align: center;
+}
+.main-image .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
 .container {
+    background: #ccc;
+    padding: 40px;
+    text-align: center;
+    /*text-align: center;
     position: relative;
     width: 100%;
     height: 200px;
-    background-color: rgb(117, 114, 114);
+    background-color: rgb(117, 114, 114);*/
 }
-img[alt="spiced"] {
-    height: 50px;
+.container #benefit {
+    text-align: left;
+    display: inline-block;
+    position: relative;
+    padding: 0 20px 0 70px;
+    width: 45%;
+    vertical-align: top;
+    margin-bottom: 30px;
+}
+
+.container .icon {
     position: absolute;
-    top: 10%;
-    left: 0%;
+    top: 0;
+    left: 10px;
+    width: 40px;
 }
-img[alt="cat"] {
+.container h4 {
+    margin: 0;
+    text-align: left;
+}
+.container p {
+    font-size: 13px;
+}
+
+.overlayNew {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.side-nav {
+    position: absolute;
+    top: 0%;
+    left: 100%;
+    bottom: 0%;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(252, 250, 252);
+    z-index: 10;
+    transition: 2s;
+}
+
+.side-nav #options {
+    text-align: left;
+    position: relative;
+    padding: 0 30px 0 10px;
+    margin: 10px;
+    font-size: 20px;
+}
+.on {
+    transition-property: transform;
+    transition-duration: 2s;
+    transform: translateX(200%);
+}
+
+@media (max-width: 500px) {
+    header {
+        height: 70px;
+        padding: 20px;
+    }
+
+    .main-image h1 {
+        font-size: 20px;
+        transform: none;
+        top: 0;
+        margin-top: 50px;
+    }
+
+    .main-image .namebutton {
+        margin-top: 20px;
+        width: 250px;
+        line-height: 30px;
+        font-size: 16px;
+        width: 150px;
+    }
+
+    .container #benefit {
+        width: auto;
+        display: block;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body,
+    .container {
+        background-color: #333333;
+        color: white;
+    }
+
+    .main-image {
+        background-color: #333333;
+    }
+
+    .main-image .overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}
+
+/*.container img[alt="cat"] {
     height: 50px;
     position: absolute;
     top: 0%;
     left: -15%;
 }
-img[alt="swim"] {
+.container img[alt="swim"] {
     height: 50px;
     position: absolute;
     top: 0%;
     left: -11%;
 }
-img[alt="world"] {
+.container img[alt="world"] {
     height: 50px;
     position: absolute;
-    top: 0%;
-    left: -15%;
 }
-img[alt="columns"] {
+.container img[alt="columns"] {
     height: 50px;
     position: absolute;
     top: 0%;
 
     left: -15%;
 }
+*/
+/*.container #Best {
+    position: absolute;
 
-img[alt="spices"] {
-    height: auto;
-    vertical-align: bottom;
-    width: 100%;
-    position: relative;
+    top: 20%;
+    left: 20%;
 }
+.container #Reliable {
+    position: absolute;
+
+    top: 20%;
+    left: 60%;
+}
+
+.container #Acquired {
+    position: absolute;
+
+    bottom: 20%;
+    left: 20%;
+}
+
+.container #No-limit {
+    position: absolute;
+    bottom: 20%;
+    left: 60%;
+}*/
