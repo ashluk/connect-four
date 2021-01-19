@@ -7,12 +7,52 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    background-color: chocolate;
+    padding: 0%;
 }
 
-#outerBox {
+.outerBox {
     display: flex;
+    align-content: flex-start;
+    flex-direction: row;
+    width: 200px;
+    height: 200px;
+    margin: 2px;
+}
+.outerBox:nth-child(2) {
+    flex-direction: row-reverse;
+}
+.outerBox:nth-child(1) {
+    flex-direction: row-reverse;
+}
+.innerBox {
+    width: 100px;
+    height: 100px;
+}
 
-    height: 25vh;
+#grey {
+    background-color: dimgray;
+}
+
+#black {
     background-color: black;
+}
+#blue {
+    background-color: blue;
+}
+#purple {
+    background-color: rgb(101, 31, 110);
+}
+#orange {
+    background-color: rgb(252, 145, 23);
+}
+#yellow {
+    background-color: yellow;
+    align-self: flex-end;
+}
+#green {
+    background-color: forestgreen;
+    align-self: flex-end;
+}
+#pink {
+    background-color: rgb(238, 188, 213);
 }
