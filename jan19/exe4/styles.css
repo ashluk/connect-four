@@ -1,0 +1,18 @@
+* {
+    margin: 0%;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: chocolate;
+}
+
+#outerBox {
+    display: flex;
+
+    height: 25vh;
+    background-color: black;
+}
