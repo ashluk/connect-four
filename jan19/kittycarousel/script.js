@@ -7,58 +7,67 @@
     for (var i = 0; i < dots.length; i++) {
         //this loop runs till the end of dots.length increasing the value of i for each dot
         (function (i) {
-            //this function takes the argument of [i] and listens to see which dot has been clicked
+            //this function takes the argument of (i) and listens to see which dot has been clicked
             dots[i].addEventListener("click", function (e) {
                 if (e.target.classList.contains("on")) {
                     //this tells us if the [i] is the currently displayed kitty by checking if the class list is on
                     return; //this tells it to do nothing if the class list is on
                 }
-                //if (transitionInProgress) {
-                //  return;
+                // if (transitionIsRunning) {
+                //   return;
                 //}
-                if (e.target[0]) {
-                    clearTimeout(timer);
-
-                    currentKitty = 0;
-                }
-                if (e.target[1]) {
-                    currentKitty = 1;
-                    clearTimeout(timer);
-                }
+                console.log(i);
+                //if (i === 0) {
+                //  moveKitties(0);
+                //kitties[currentKitty].classList.add("noAnimationEnter");
+                //kitties[currentKitty].classList.add("noAnimationExit");
+                clearTimeout(timer);
+                moveKitties(i);
+                // }
             });
         })(i);
     }
 
-    function moveKitties(dotKitty) {
-        if (dotKitty === i) {
-            currentKitty = [i];
-        } else {
-            dots[currentKitty].classList.remove("on");
-            kitties[currentKitty].classList.remove("onscreen"); //this removes the first kitty
-            kitties[currentKitty].classList.add("exit"); //this applys the transition properties for the exit
+    function moveKitties(arg) {
+        //if arg is not undefined then lines 33-36 should not happen. instead set currentKitty to arg.
+        dots[currentKitty].classList.remove("on");
+        kitties[currentKitty].classList.remove("onscreen"); //this removes the first kitty
+        kitties[currentKitty].classList.add("exit"); //this applys the transition properties for the exit
+        if (arg === 0) {
+            currentKitty = 0;
+        }
+        if (arg) {
+            currentKitty = arg;
+        }
+        if (arg === undefined) {
             currentKitty++;
             if (currentKitty === kitties.length) {
                 currentKitty = 0;
             }
-
-            dots[currentKitty].classList.add("on");
-
-            kitties[currentKitty].classList.add("onscreen"); //this applies the transition to the next cat
-
-            setTimeout(moveKitties, 5000); //we have a transition duration of 3s, so we choose 5s for the settime out so that one kitty is all the way off before the next comes on
         }
+
+        dots[currentKitty].classList.add("on");
+
+        kitties[currentKitty].classList.add("onscreen"); //this applies the transition to the next cat
+
+        timer = setTimeout(moveKitties, 5000); //we have a transition duration of 3s, so we choose 5s for the settime out so that one kitty is all the way off before the next comes on
     }
 
-    setTimeout(moveKitties, 1000); //this waits 1000ms and then calls the functon Movekitties
+    //setTimeout(moveKitties, 1000); //this waits 1000ms and then calls the functon Movekitties
 
-    document.addEventListener("transitionrun", function (e) {
-        console.log("transition running...", e.target.classList);
-    });
+    //var transitionIsRunning =
+    /*document.addEventListener(
+        "transitionrun",
+        function (e) {
+            console.log("transition running...", e.target.classList);
+        }
+    );*/
 
     document.addEventListener("transitionend", function (e) {
         //console.log("transition ended...", e.target.classList); //this keeps track of when the items transition ends. we need to figure out which element we want to remove the exit class from.
         e.target.classList.remove("exit");
     });
+    //console.log(transitionIsRunning);
 })();
 
 //we want to remove the class exit as well.

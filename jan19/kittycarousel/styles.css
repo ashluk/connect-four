@@ -49,3 +49,14 @@
 .on {
     background-color: white;
 }
+
+#kitties img.noAnimationExit {
+    transform: translateX(-100%);
+    transition: transform;
+    transition-duration: 0s;
+}
+#kitties img.noAnimationEnter {
+    transform: translateX(0%);
+    transition: transform;
+    transition-duration: 0s;
+}
