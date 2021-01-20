@@ -1,0 +1,54 @@
+* {
+    margin: 0%;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 200px 200px 200px 200px;
+    padding: 0%;
+    gap: 5px;
+}
+
+.outerBox {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-template-rows: 100px 100px;
+
+    max-height: 200px;
+}
+
+.innerBox {
+    min-width: 100px;
+}
+
+#grey {
+    background-color: dimgray;
+}
+
+#black {
+    background-color: black;
+}
+#blue {
+    background-color: blue;
+}
+#purple {
+    background-color: rgb(101, 31, 110);
+}
+#orange {
+    background-color: rgb(252, 145, 23);
+    grid-area: 1/2/2/2;
+}
+#yellow {
+    background-color: yellow;
+    grid-area: 2/3/2/2;
+}
+#green {
+    background-color: forestgreen;
+    grid-row: 2/3;
+    grid-column: 1/2;
+}
+#pink {
+    background-color: rgb(238, 188, 213);
+}
