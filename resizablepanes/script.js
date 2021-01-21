@@ -16,7 +16,7 @@
         mouseMove = false;
     });
 
-    $(".slider").mousemove(function (e) {
+    $(".top").mousemove(function (e) {
         if (mouseMove == false) return;
 
         e.preventDefault();
