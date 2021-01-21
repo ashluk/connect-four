@@ -24,16 +24,15 @@ function moveHeadlines() {
         leftJQ += linksJQ.eq(0).offsetWidth;
         headlinesJQ.appendChild(linksJQ.eq(0));
     }
-    headlinesJQ.css ({ 
-        left: leftJQ + 'px';
-        
-    })
-    headlines.style.left = left + "px";
+    headlinesJQ.css({
+        left: leftJQ + "px",
+    });
     requestId = requestAnimationFrame(moveHeadlines);
 }
 moveHeadlines();
 
-for (var i = 0; i < links.length; i++) {
+//vanilla JS
+/*for (var i = 0; i < links.length; i++) {
     //console.log('links[i]: ',links[i]);
     links[i].addEventListener("mouseenter", function (e) {
         console.log("e.target mouse enter:", e.target);
@@ -41,18 +40,39 @@ for (var i = 0; i < links.length; i++) {
         e.target.style.color = "blue";
         e.target.style.textDecoration = "underline";
         cancelAnimationFrame(requestId);
+    });*/
+//JQ
+for (var i = 0; i < linksJQ.length; i++) {
+    //console.log('links[i]: ',links[i]);
+
+    linksJQ.eq(i).on("mouseenter", function (e) {
+        e.target.css({
+            color: "blue",
+            textDecoration: "underline",
+        });
+
+        cancelAnimationFrame(requestId);
     });
-    links[i].addEventListener("mouseleave", function (e) {
+    //vanilla JS
+    /*links[i].addEventListener("mouseleave", function (e) {
         console.log("e.target mouse leave: ", e.target);
         e.target.style.color = "black";
         e.target.style.textDecoration = "none";
 
         //headlines.style.left = left + "px";
         requestId = requestAnimationFrame(moveHeadlines);
+    });*/
+
+    linksJQ.eq(i).on("mouseleave", function (e) {
+        console.log("e.target mouse leave: ", e.target);
+        e.target.css({
+            color: "black",
+            textDecoration: "underline",
+        });
+
+        requestId = requestAnimationFrame(moveHeadlines);
     });
 }
-
-
 
 /*function checkHeadlines() {
     requestId = requestAnimationFrame(moveHeadlines);

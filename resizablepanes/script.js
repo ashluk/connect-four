@@ -5,7 +5,7 @@
     var sliderJQ = $(".slider");
     //console.log(sliderJQ);
     var mousePosition;
-    var mouseMove;
+    var mouseMove = false;
 
     $(".slider").mousedown(function (e) {
         mouseMove = true;
@@ -14,13 +14,14 @@
         console.log("yes, this works!", mouseMove);
     });
 
-    $(".slider").mouseup(function () {
+    $(document).mouseup(function () {
         mouseMove = false;
         removeEventListener("mousemove", document);
     });
 
     $(".container").mousemove(function (e) {
         if (mouseMove == false) return;
+
         if (mouseMove == true) console.log("is this my problem", mouseMove);
         e.preventDefault();
         var x = e.clientX;

@@ -64,8 +64,8 @@ $("#boost-button").on("click", function boostTurtle(e) {
         .css({
             left: animalsLeft[0] + "px",
         })
-        // .hide(1000)
-        // .show(1000);
+        .hide(1000)
+        .show(1000);
         .fadeOut()
         .fadeIn();
 

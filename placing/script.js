@@ -2,6 +2,16 @@ var sideNav = document.getElementsByClassName("side-nav");
 var menuButton = document.getElementById("menu");
 var x = document.getElementById("x");
 var overlayNew = document.getElementsByClassName("overlayNew");
+var modalJQ = $(".modal");
+var spanJQ = $(".close");
+
+overlayNew[0].classList.add("invisible");
+
+spanJQ.on("click", function () {
+    modalJQ.css({
+        display: "none",
+    });
+});
 
 menuButton.addEventListener("click", function () {
     //console.log("i am listening");
@@ -14,3 +24,11 @@ x.addEventListener("click", function () {
     sideNav[0].classList.remove("on");
     overlayNew[0].classList.add("invisible");
 });
+
+/*window.on("click", function (event) {
+    if (event.target == modalJQ) {
+        modalJQ.css({
+            display: "none",
+        });
+    }
+});*/

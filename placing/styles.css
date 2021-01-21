@@ -69,6 +69,45 @@ header img[alt="spiced"] {
 
     text-align: center;
 }
+.modal {
+    /*display: none;*/
+
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+
+    color: black;
+    font-weight: bolder;
+    text-align: center;
+    font-size: 20px;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.3);
+
+    z-index: 10;
+}
+.modal-content {
+    background-color: rgb(252, 6, 219);
+    margin: 15% auto;
+    padding: 20px;
+
+    border: 2px solid white;
+    width: 80%;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 .main-image .overlay {
     position: absolute;
     top: 0;
@@ -120,7 +159,7 @@ header img[alt="spiced"] {
     width: 80%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
-    visibility: visible;
+    /*visibility: invisible;*/
 }
 
 .side-nav {
