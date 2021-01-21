@@ -5,21 +5,41 @@
     var sliderJQ = $(".slider");
     //console.log(sliderJQ);
     var mousePosition;
+    var mouseMove;
 
-    sliderJQ
-        .on("mousedown", function sliding(e) {
-            console.log("clicked on slider!");
-            //$(e.currentTarget).off("mouseup", fn);
-        })
-        .on("mousemove", function moving(e) {
-            console.log("im moving");
+    $(".slider").mousedown(function () {
+        mouseMove = true;
+        console.log("yes, this works!", mouseMove);
+    });
 
-            e.preventDefault();
-            mousePosition = {
-                x: e.clientX,
-            };
-            sliderJQ.style.left = mousePosition.x;
-        });
+    $(document).mouseup(function () {
+        mouseMove = false;
+    });
+
+    $(".slider").mousemove(function (e) {
+        if (mouseMove == false) return;
+
+        e.preventDefault();
+        var x = e.clientX;
+        var width = $(".slider").offsetWidth;
+        $(".slider").style.left = x - width / 2 + "px";
+        /* topDogJQ.eq().css({
+            width: 10 + "px",
+        });*/
+    });
+
+    sliderJQ.on("mousedown", function sliding(e) {
+        console.log("clicked on slider!");
+        mouseMove = "true";
+    });
+
+    sliderJQ.on("mousemove", function moving(e) {
+        console.log("im moving");
+        e.preventDefault();
+        mousePosition = {
+            x: e.clientX,
+        };
+    });
 
     /*$("#target").mousemove(function (event) {
         var msg = "Handler for .mousemove() called at ";
