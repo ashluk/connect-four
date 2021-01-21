@@ -21,14 +21,17 @@
 
         e.preventDefault();
         var x = e.clientX;
-        var width = $(".slider").offsetWidth;
-        $(".slider").style.left = x - width / 2 + "px";
+        var width = $(".slider").width;
+        $(".slider").css({
+            left: x - width / 2 + "px",
+        });
+
         /* topDogJQ.eq().css({
             width: 10 + "px",
         });*/
     });
 
-    sliderJQ.on("mousedown", function sliding(e) {
+    sliderJQ.on("mousedown", function sliding() {
         console.log("clicked on slider!");
         mouseMove = "true";
     });
