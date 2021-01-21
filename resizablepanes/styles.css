@@ -1,0 +1,56 @@
+img {
+    height: 400px;
+    width: 600px; /*shortcut w600*/
+    object-fit: cover; /*this preserves the original proportions*/
+}
+
+.container {
+    height: 400px;
+    width: 600px;
+    position: relative;
+}
+
+.bottom,
+.top {
+    position: absolute;
+}
+
+.top {
+    overflow: hidden;
+    width: 100%;
+}
+.slider {
+    position: absolute;
+    left: 500px;
+    height: 100%;
+    width: 10px;
+    background-color: black;
+}
+/*top image needs to be resized, bottom image will stay the same*/
+/*do this using overflow-hidden*/
+
+/*we want both the left value of the sider and the width of the top dog to move at the same time
+update the left value of the slider and the width of the top dog at the same time! 
+
+USE Jquery methods for this. 
+.offset( ) will return the coordinates of an element of the page. it will return an object with 2 values, top and left
+.position()
+.width() or .outerWidth() will give you the width
+e.clientX
+e.preventDefault <---- we shjould use this in our mouseDown event. 
+width of top dog and value of the slider are more or less the same value
+
+we need to take the container width into consideration, also the slider width
+also we need to take any margins in the browser into consideration. 
+-we also have to make sure that the slider stops at the edge of the image. as soon as the mouse leaves the container we want the slider to stop moving
+-take the slider width into consideration. 
+-the slider ONLY moves when the mouse is down. use mouseDown and mouseUp events. (when the mouse goes up we will need to remove event listener. 
+
+
+1. in the callback function when the event takes place we want to add another listener that is listening for a mouse move event. 
+2.while the mouse is moveing we need to update the width of the top div. (this is the value that needs to change) and the left hand position of the slider
+(update both of these while the mouse is moving --- depending on where the mouse is within the container (e.clientX to get this value) (X because we only move left and right)
+3. if the mouse leaves the container bounds then the slider will stop moving. 
+4. if the user mouses up anywhere on the DOCUMENT(<--hint)we will want to remove the mousemove event listener from the container. 
+
+offset, position, width, outerwidth and preventdefault are all helpful in this exercise
