@@ -4,6 +4,8 @@
     var dots = document.getElementsByClassName("dot");
     var timer = setTimeout(moveKitties, 1000);
 
+    var transitionIsRunning;
+
     for (var i = 0; i < dots.length; i++) {
         //this loop runs till the end of dots.length increasing the value of i for each dot
         (function (i) {
@@ -13,9 +15,7 @@
                     //this tells us if the [i] is the currently displayed kitty by checking if the class list is on
                     return; //this tells it to do nothing if the class list is on
                 }
-                // if (transitionIsRunning) {
-                //   return;
-                //}
+
                 console.log(i);
                 //if (i === 0) {
                 //  moveKitties(0);
@@ -28,11 +28,25 @@
         })(i);
     }
 
+    document.addEventListener("transitionend", function (e) {
+        e.target.classList.remove("exit");
+        return (transitionIsRunning = "false");
+    });
+    kitties.addEventListener("transitionrun", function (e) {
+        if (e.target.classList.contains("onscreen")) {
+            return (transitionIsRunning = "true");
+        }
+    });
+
     function moveKitties(arg) {
         //if arg is not undefined then lines 33-36 should not happen. instead set currentKitty to arg.
         dots[currentKitty].classList.remove("on");
         kitties[currentKitty].classList.remove("onscreen"); //this removes the first kitty
         kitties[currentKitty].classList.add("exit"); //this applys the transition properties for the exit
+        if (transitionIsRunning === "true") {
+            clearTimeout(timer);
+            moveKitties();
+        }
         if (arg === 0) {
             currentKitty = 0;
         }
@@ -66,8 +80,9 @@
     document.addEventListener("transitionend", function (e) {
         //console.log("transition ended...", e.target.classList); //this keeps track of when the items transition ends. we need to figure out which element we want to remove the exit class from.
         e.target.classList.remove("exit");
+        return (transitionIsRunning = "false");
     });
-    //console.log(transitionIsRunning);
+    console.log("value of", transitionIsRunning);
 })();
 
 //we want to remove the class exit as well.
