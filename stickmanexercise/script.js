@@ -4,10 +4,6 @@ var ctx = canvas.getContext("2d");
 var ctx2 = outerCanvas.getContext("2d");
 var image = document.getElementById("innerCanvas");
 
-//ctx.beginPath();
-//ctx.fillStyle = "darksalmon";
-//ctx.fillRect(0, 0, canvas.width, canvas.height);
-
 ctx.beginPath();
 ctx.arc(225, 100, 70, 0, Math.PI * 2);
 ctx.lineWidth = 7;
@@ -115,10 +111,3 @@ function moveStick(event) {
 }
 
 document.addEventListener("keydown", moveStick);
-
-//node.addEventListener("keydown", function (event) {
-//   const key = event.key; // "ArrowRight", "ArrowLeft", "ArrowUp", or "ArrowDown"
-//});
-
-// https://stackoverflow.com/questions/33981988/how-to-move-an-image-on-canvas-html5-with-arrow-key-press
-//this might be useful to look at later

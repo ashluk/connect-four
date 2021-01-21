@@ -1,8 +1,13 @@
-var headlines = document.getElementById("headlines");
-var left = headlines.offsetLeft;
-var links = document.getElementsByTagName("a");
+console.log("am i crazy?", $);
+//var headlines = document.getElementById("headlines");
+var headlinesJQ = $("#headlines");
+//var left = headlines.offsetLeft;
+var leftJQ = headlinesJQ.offset().left;
+//var links = document.getElementsByTagName("a");
+var linksJQ = $("a");
 var requestId;
 
+//vanilla JS
 /*function moveHeadlines() {
     left--;
     if (left < -links[0].offsetWidth) {
@@ -10,16 +15,19 @@ var requestId;
         headlines.appendChild(links[0]);
     }
     headlines.style.left = left + "px";
-    requestAnimationFrame(moveHeadlines);
-}
-moveHeadlines();*/
-
+    requestId = requestAnimationFrame(moveHeadlines);
+}*/
+//JQ -->
 function moveHeadlines() {
-    left--;
-    if (left < -links[0].offsetWidth) {
-        left += links[0].offsetWidth;
-        headlines.appendChild(links[0]);
+    leftJQ--;
+    if (leftJQ < -linksJQ.eq(0).offsetWidth) {
+        leftJQ += linksJQ.eq(0).offsetWidth;
+        headlinesJQ.appendChild(linksJQ.eq(0));
     }
+    headlinesJQ.css ({ 
+        left: leftJQ + 'px';
+        
+    })
     headlines.style.left = left + "px";
     requestId = requestAnimationFrame(moveHeadlines);
 }
@@ -43,6 +51,8 @@ for (var i = 0; i < links.length; i++) {
         requestId = requestAnimationFrame(moveHeadlines);
     });
 }
+
+
 
 /*function checkHeadlines() {
     requestId = requestAnimationFrame(moveHeadlines);
