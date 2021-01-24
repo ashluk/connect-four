@@ -1,0 +1,110 @@
+* {
+    margin: 0%;
+}
+body {
+    background-color: black;
+}
+.slot {
+    align-self: center;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+}
+
+.hole {
+    align-self: center;
+
+    height: 60px;
+    width: 60px;
+
+    transform: translate(-30px, -30px);
+    /*border: 40px solid rgb(238, 166, 133);*/
+    border: 40px solid whitesmoke;
+
+    border-radius: 50%;
+}
+
+#board {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.victory {
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: hotpink;
+    z-index: 1;
+}
+.img .catgif {
+    position: absolute;
+    width: 100%;
+}
+.reset {
+    background-color: rgb(6, 12, 0);
+    height: 30px;
+    width: 100px;
+    color: ghostwhite;
+    border: whitesmoke 3px solid;
+    align-self: center;
+    padding: 3px;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: 25px;
+}
+
+.reset:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    cursor: pointer;
+}
+.flexcontainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.red {
+    width: 80px;
+    height: 80px;
+    margin-top: 5px;
+    margin-right: 10px;
+    font-size: 40px;
+    text-align: center;
+
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+
+    color: rgb(243, 211, 151);
+}
+.yellow {
+    margin-top: 5px;
+    margin-left: 10px;
+
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+
+    font-size: 40px;
+    color: rgb(159, 159, 219);
+}
+.connect {
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    margin: 20px;
+    align-self: stretch;
+    font-size: 50px;
+    color: ghostwhite;
+}
+.topRow {
+    display: flex;
+    justify-content: center;
+    /*margin-bottom: 10px;*/
+}
+.player1 {
+    background-color: rgb(243, 211, 151);
+}
+.player2 {
+    background-color: rgb(159, 159, 219);
+}
