@@ -2,7 +2,7 @@
     margin: 0%;
 }
 body {
-    background-color: black;
+    background-color: rgb(17, 16, 16);
 }
 .slot {
     align-self: center;
@@ -10,7 +10,10 @@ body {
     height: 80px;
     overflow: hidden;
 }
-
+.slot:hover {
+    background-color: rgb(59, 57, 57);
+    cursor: pointer;
+}
 .hole {
     align-self: center;
 
@@ -18,7 +21,6 @@ body {
     width: 60px;
 
     transform: translate(-30px, -30px);
-    /*border: 40px solid rgb(238, 166, 133);*/
     border: 40px solid whitesmoke;
 
     border-radius: 50%;
@@ -27,22 +29,9 @@ body {
 #board {
     display: flex;
     justify-content: center;
-    padding: 10px;
+    padding: 5px;
 }
-.victory {
-    display: none;
-    position: fixed;
-    top: 25%;
-    left: 50%;
-    width: 100px;
-    height: 100px;
-    background-color: hotpink;
-    z-index: 1;
-}
-.img .catgif {
-    position: absolute;
-    width: 100%;
-}
+
 .reset {
     background-color: rgb(6, 12, 0);
     height: 30px;
@@ -67,44 +56,64 @@ body {
     flex-direction: column;
 }
 .red {
-    width: 80px;
-    height: 80px;
+    visibility: hidden;
+    align-self: flex-start;
+
     margin-top: 5px;
     margin-right: 10px;
-    font-size: 40px;
+    font-size: 80px;
     text-align: center;
 
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 
-    color: rgb(243, 211, 151);
+    color: rgb(115, 253, 1);
 }
+
 .yellow {
+    visibility: hidden;
     margin-top: 5px;
     margin-left: 10px;
 
-    width: 80px;
-    height: 80px;
     text-align: center;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 
-    font-size: 40px;
+    font-size: 80px;
     color: rgb(159, 159, 219);
 }
 .connect {
+    visibility: visible;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
     margin: 20px;
     align-self: stretch;
     font-size: 50px;
+    color: rgb(250, 137, 137);
+}
+strong {
     color: ghostwhite;
+    outline: greenyellow 2px solid;
 }
 .topRow {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     /*margin-bottom: 10px;*/
 }
+
 .player1 {
-    background-color: rgb(243, 211, 151);
+    background-color: rgb(115, 253, 1);
 }
 .player2 {
     background-color: rgb(159, 159, 219);
 }
+
+/*victory {
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 25%;
+
+    text-align: center;
+    font-size: 120px;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    color: deeppink;
+    z-index: 1;
+}*/
