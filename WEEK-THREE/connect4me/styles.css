@@ -28,6 +28,7 @@ body {
 
 #board {
     display: flex;
+
     justify-content: center;
     padding: 5px;
 }
@@ -80,7 +81,12 @@ body {
     font-size: 80px;
     color: rgb(159, 159, 219);
 }
+
 .connect {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 1;
+    flex-wrap: nowrap;
     visibility: visible;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
     margin: 20px;
@@ -90,7 +96,6 @@ body {
 }
 strong {
     color: ghostwhite;
-    outline: greenyellow 2px solid;
 }
 .topRow {
     display: flex;
@@ -104,16 +109,3 @@ strong {
 .player2 {
     background-color: rgb(159, 159, 219);
 }
-
-/*victory {
-    display: none;
-    position: fixed;
-    top: 25%;
-    left: 25%;
-
-    text-align: center;
-    font-size: 120px;
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-    color: deeppink;
-    z-index: 1;
-}*/

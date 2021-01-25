@@ -1,5 +1,6 @@
 var currentPlayer = "player1";
 var winner = $(".red");
+var winningCombo = $(".winningCombo");
 var slotNumbers = $(".slot");
 var diags = [
     [0, 7, 14, 21],
@@ -32,9 +33,6 @@ $(".column").on("click", function (e) {
     var col = $(e.currentTarget);
     var slotsInCol = col.children();
     for (var i = slotsInCol.length - 1; i >= 0; i--) {
-        //console.log("slotsInCol:", slotsInCol.eq(i));
-        //check that the slot is free
-        //does not have player1 and does not have player2 class
         if (
             !slotsInCol.eq(i).hasClass("player1") &&
             !slotsInCol.eq(i).hasClass("player2")
@@ -73,7 +71,6 @@ function youWon(player) {
         if (winner.css("visibility") == "hidden") {
             winner.css("visibility", "visible");
             winner.animate({ fontSize: "35em" }, "slow", "swing");
-
             $(".connect").animate(
                 { rotation: 90 },
                 {
@@ -89,6 +86,7 @@ function youWon(player) {
             winner.css("visibility", "hidden");
         }
     }, 300);
+
     setTimeout(function () {
         winner.animate({ fontSize: "80px" }, "slow", "swing");
         winner.css("visibility", "hidden");
