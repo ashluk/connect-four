@@ -1,7 +1,6 @@
 (function (countries) {
     var resultsContainer = $(".results");
     var noResultsContainer = $(".noResults");
-    var userCountry = $("input.placeholder");
     //console.log("results:", resultsContainer);
     var searchField = $("input"); //we are referencing using tag so no '.' needed b4
 
@@ -75,19 +74,13 @@
         $(event.target).removeClass("highlight");
     });
 
-    var inputCountry = "";
-
     //***** MOUSEDOWN EVENTS ON COUNTRIES
     $("body").on("mousedown", ".country", function (event) {
-        //event.preventDefault();
-        inputCountry += "<p class='country'>" + event.target + "</p>";
-
-        $("input").val(inputCountry);
-        //$(event.target).addClass("highlight");
-
-        console.log("this is my", inputCountry);
+        event.preventDefault();
+        //$("input").val(event.target); //what i was missing in my original was that i didnt target it as a $ and i didnt specify text.
+        $("input").val($(event.target).text()); //this is setting the value of the input to just the text info of the event target
+        $(".results").html("");
     });
-    userCountry.html(inputCountry);
 
     /* $("#setText").click(function(event) { 
             $('#input').val("GeeksForGeeks"); 
