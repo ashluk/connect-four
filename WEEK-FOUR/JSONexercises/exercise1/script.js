@@ -1,28 +1,23 @@
 var inputField = $("input");
+var validContainer = $(".json");
 
-//1.make button click event
 $("button").on("click", function () {
     var userInput = inputField.val();
-    var jsonObj = JSON.parse(userInput);
+    //var jsonObj = JSON.parse(userInput);
 
-    console.log("input:", jsonObj);
+    var validOrNo = "";
 
     try {
-        JSON.parse({ name: "ash" });
+        JSON.parse(userInput);
+        validOrNo += "<p class= 'json'>" + "VALID" + "</p>";
     } catch (error) {
         console.log("error: ", error);
+        validOrNo += "<p class= 'json'>" + "INVALID" + "</p>";
+    }
+    validContainer.html(validOrNo);
+
+    if (validContainer.text() !== "VALID") {
+        console.log("INVALID");
     }
 });
-//2. listen to user input
-
-/*inputField.on("input", function () {
-    var userInput = inputField.val();
-    var jsonObj = JSON.parse(userInput);
-
-    */
-
-//3.try catch for if userinput is not JSON
-
-//4.create popup
-
-// TEST JSON      {"result":true, "count":42}
+// TEST JSON --- {"result":true, "count":42}
