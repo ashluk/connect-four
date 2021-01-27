@@ -19,8 +19,6 @@ $.ajax({
         }
 
         $("#headlines").html(myUrls);
-
-        //console.log("response in success", linkData);
     },
     error: function (err) {
         console.log("err in ajax", err);
@@ -29,12 +27,12 @@ $.ajax({
 
 function moveHeadlines() {
     leftJQ--;
-    if (leftJQ < -linksJQ.eq(0).outerWidth()) {
-        leftJQ += linksJQ.eq(0).outerWidth();
+    if (leftJQ < -$("a").eq(0).outerWidth()) {
+        leftJQ += $("a").eq(0).outerWidth();
         //headlinesJQ.appendChild(linksJQ.eq(0));
-        linksJQ.eq(0).appendTo(headlinesJQ);
+        $("a").eq(0).appendTo(headlinesJQ);
         linksJQ = $("a");
-        linkWidth = linksJQ.eq(0).outerWidth();
+        linkWidth = $("a").eq(0).outerWidth();
     }
     headlinesJQ.css({
         left: leftJQ + "px",
@@ -43,25 +41,27 @@ function moveHeadlines() {
 }
 moveHeadlines();
 
-for (var i = 0; i < linksJQ.length; i++) {
-    linksJQ.eq(i).on("mouseenter", function (e) {
-        $(e.target).css({
-            color: "blue",
-            textDecoration: "underline",
-        });
-
-        cancelAnimationFrame(requestId);
+$("#headlines").on("mouseenter", function (e) {
+    //console.log("im listening!");
+    $(e.target).css({
+        color: "blue",
+        textDecoration: "underline",
     });
 
-    linksJQ.eq(i).on("mouseleave", function (e) {
-        $(e.target).css({
-            color: "black",
-            textDecoration: "none",
-        });
+    cancelAnimationFrame(requestId);
+});
 
-        requestId = requestAnimationFrame(moveHeadlines);
+$("#headlines").on("mouseleave", function (e) {
+    //linksJQ.eq(i).on("mouseleave", function (e) {
+    $(e.target).css({
+        color: "black",
+        textDecoration: "none",
     });
-}
+
+    requestId = requestAnimationFrame(moveHeadlines);
+});
+//for (var i = 0; i < $("a").length; i++) {
+//}
 
 //vanilla JS
 /*function moveHeadlines() {
