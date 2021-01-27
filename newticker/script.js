@@ -1,11 +1,67 @@
 console.log("am i crazy?", $);
-//var headlines = document.getElementById("headlines");
 var headlinesJQ = $("#headlines");
-//var left = headlines.offsetLeft;
 var leftJQ = headlinesJQ.offset().left;
-//var links = document.getElementsByTagName("a");
 var linksJQ = $("a");
+var linkWidth = linksJQ.eq(0).outerWidth();
 var requestId;
+
+$.ajax({
+    url: "/links.json",
+    method: "GET",
+    success: function (textData) {
+        var myUrls = "";
+        for (var i = 0; i < textData.length; i++) {
+            //console.log("url avaiable", textData[i].url); //this is going to log the value of urls in response
+            var text = textData[i].text;
+            var url = textData[i].url;
+            myUrls += "<a href=" + url + ">" + " " + text + "</a>";
+            //console.log("these are my urls", myUrls);
+        }
+
+        $("#headlines").html(myUrls);
+
+        //console.log("response in success", linkData);
+    },
+    error: function (err) {
+        console.log("err in ajax", err);
+    },
+});
+
+function moveHeadlines() {
+    leftJQ--;
+    if (leftJQ < -linksJQ.eq(0).outerWidth()) {
+        leftJQ += linksJQ.eq(0).outerWidth();
+        //headlinesJQ.appendChild(linksJQ.eq(0));
+        linksJQ.eq(0).appendTo(headlinesJQ);
+        linksJQ = $("a");
+        linkWidth = linksJQ.eq(0).outerWidth();
+    }
+    headlinesJQ.css({
+        left: leftJQ + "px",
+    });
+    requestId = requestAnimationFrame(moveHeadlines);
+}
+moveHeadlines();
+
+for (var i = 0; i < linksJQ.length; i++) {
+    linksJQ.eq(i).on("mouseenter", function (e) {
+        $(e.target).css({
+            color: "blue",
+            textDecoration: "underline",
+        });
+
+        cancelAnimationFrame(requestId);
+    });
+
+    linksJQ.eq(i).on("mouseleave", function (e) {
+        $(e.target).css({
+            color: "black",
+            textDecoration: "none",
+        });
+
+        requestId = requestAnimationFrame(moveHeadlines);
+    });
+}
 
 //vanilla JS
 /*function moveHeadlines() {
@@ -17,19 +73,6 @@ var requestId;
     headlines.style.left = left + "px";
     requestId = requestAnimationFrame(moveHeadlines);
 }*/
-//JQ -->
-function moveHeadlines() {
-    leftJQ--;
-    if (leftJQ < -linksJQ.eq(0).offsetWidth) {
-        leftJQ += linksJQ.eq(0).offsetWidth;
-        headlinesJQ.appendChild(linksJQ.eq(0));
-    }
-    headlinesJQ.css({
-        left: leftJQ + "px",
-    });
-    requestId = requestAnimationFrame(moveHeadlines);
-}
-moveHeadlines();
 
 //vanilla JS
 /*for (var i = 0; i < links.length; i++) {
@@ -41,20 +84,9 @@ moveHeadlines();
         e.target.style.textDecoration = "underline";
         cancelAnimationFrame(requestId);
     });*/
-//JQ
-for (var i = 0; i < linksJQ.length; i++) {
-    //console.log('links[i]: ',links[i]);
 
-    linksJQ.eq(i).on("mouseenter", function (e) {
-        e.target.css({
-            color: "blue",
-            textDecoration: "underline",
-        });
-
-        cancelAnimationFrame(requestId);
-    });
-    //vanilla JS
-    /*links[i].addEventListener("mouseleave", function (e) {
+//vanilla JS
+/*links[i].addEventListener("mouseleave", function (e) {
         console.log("e.target mouse leave: ", e.target);
         e.target.style.color = "black";
         e.target.style.textDecoration = "none";
@@ -62,22 +94,3 @@ for (var i = 0; i < linksJQ.length; i++) {
         //headlines.style.left = left + "px";
         requestId = requestAnimationFrame(moveHeadlines);
     });*/
-
-    linksJQ.eq(i).on("mouseleave", function (e) {
-        console.log("e.target mouse leave: ", e.target);
-        e.target.css({
-            color: "black",
-            textDecoration: "underline",
-        });
-
-        requestId = requestAnimationFrame(moveHeadlines);
-    });
-}
-
-/*function checkHeadlines() {
-    requestId = requestAnimationFrame(moveHeadlines);
-    return requestId;
-    //console.log("requestId: ", requestId);
-}
-
-checkHeadlines();*/
