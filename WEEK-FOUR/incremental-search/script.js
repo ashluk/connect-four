@@ -81,10 +81,43 @@
         $("input").val($(event.target).text()); //this is setting the value of the input to just the text info of the event target
         $(".results").html("");
     });
+    //******KEYDOWN EVENTS */
 
-    /* $("#setText").click(function(event) { 
-            $('#input').val("GeeksForGeeks"); 
-        });  */
+    $("body").keydown(".country", function (e) {
+        var arrow = { enter: 13, up: 38, down: 40 };
+        var matchResults = $("p");
+        var highlightResults = [];
+
+        for (var h = 0; h < matchResults.length; h++) {
+            highlightResults.push(matchResults[h]);
+        }
+        console.log("highlightresults:", highlightResults[0]);
+
+        switch (e.which) {
+            case arrow.up:
+                if (!matchResults.hasClass("highlight")) {
+                    highlightResults[3].css("background", "yellow");
+                }
+                break;
+
+            case arrow.down:
+                if (!matchResults.hasClass("highlight")) {
+                    highlightResults[0].addClass("highlight");
+                }
+                break;
+
+            case arrow.enter:
+                $("input").val($(e.target).text());
+                $(".results").html("");
+
+                break;
+        }
+    });
+
+    //***********FOCUS
+    $("input").focus(function () {});
+
+    //***********BLUR
 })([
     "Afghanistan",
     "Albania",
