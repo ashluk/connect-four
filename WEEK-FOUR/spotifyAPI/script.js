@@ -14,32 +14,48 @@
             },
             success: function (response) {
                 response = response.artists || response.albums; //this gives us the artist obhect inside the albums object
-                //console.log("response", response);
+                console.log("response", response);
                 var resultsHtml = "";
                 var requestHtml = "";
+                var requestFor = $(".requested");
+                if (response.items.length == 0) {
+                    requestFor = "no results";
+                } else {
+                    requestFor = "RESULTS FOR " + userInput;
+                }
+                requestHtml += "<div>" + requestFor + "</div>";
+                $(".requested").html(requestHtml);
+                //console.log("why do i exist", requestHtml);
                 for (var i = 0; i < response.items.length; i++) {
-                    var requestFor = $(".requested");
-                    if (response.items.length == 0) {
-                        requestFor = "no results";
-                    } else {
-                        requestFor = userInput;
-                    }
-                    requestHtml += "<div>" + requestFor + "</div>";
-                    console.log("myresults", requestHtml);
-                    $(".requested").html(requestHtml);
-                    var defaultImage =
-                        "https://i.guim.co.uk/img/media/7a633730f5f90db3c12f6efc954a2d5b475c3d4a/0_138_5544_3327/master/5544.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=27c09d27ccbd139fd0f7d1cef8f7d41d";
+                    var defaultImage = "nophotoplaceholder.jpg";
                     //this accesses the items property of the obhect returned by spotify
                     if (response.items[i].images.length > 0) {
                         defaultImage = response.items[i].images[0].url;
                     }
+
+                    //EXTERNAL URLS NOT WORKING
+
+                    /* for (
+                        var j = 0;
+                        j < response.items.external_urls.spotify.length;
+                        j++
+                    )
+                        var url = response.items[j].external_urls[0].spotify;**/
+
+                    var url = "http://spiced.spaced"; //set to spiced to text the anchor tags
+
                     resultsHtml +=
+                        "<a href=" +
+                        url +
+                        ">" +
                         "<div>" +
                         response.items[i].name +
                         "</div>" +
                         '<img src="' +
                         defaultImage +
-                        '"/>';
+                        '"/>' +
+                        "</a>";
+                    console.log("my string", resultsHtml);
                 }
                 $(".results-container").html(resultsHtml);
 
@@ -50,10 +66,43 @@
                         "api.spotify.com/v1/search",
                         "spicedify.herokuapp.com/spotify"
                     );
+                console.log("NEXT", nextUrl);
+
                 if (nextUrl != null) {
                     $(".more").toggle();
-
-                    $(".more").on("click", function () {});
+                    $(".more").on("click", function () {
+                        $.ajax({
+                            url: nextUrl,
+                            success: function (response) {
+                                response = response.artists || response.albums;
+                                var resultsHtml = "";
+                                for (
+                                    var i = 0;
+                                    i < response.items.length;
+                                    i++
+                                ) {
+                                    var defaultImage = "nophotoplaceholder.jpg";
+                                    //this accesses the items property of the obhect returned by spotify
+                                    if (response.items[i].images.length > 0) {
+                                        defaultImage =
+                                            response.items[i].images[0].url;
+                                    }
+                                    resultsHtml += //wrap this div in an a tag and give the div in the url
+                                        "<a href=" +
+                                        url +
+                                        ">" +
+                                        "<div>" +
+                                        response.items[i].name +
+                                        "</div>" +
+                                        '<img src="' +
+                                        defaultImage +
+                                        '"/>' +
+                                        "</a>";
+                                }
+                                $(".results-container").html(resultsHtml);
+                            },
+                        });
+                    });
                 }
             },
         });

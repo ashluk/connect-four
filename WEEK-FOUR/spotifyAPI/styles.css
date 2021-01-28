@@ -1,0 +1,41 @@
+body {
+    position: relative; /*justify-content: center;
+    flex-direction: row;*/
+
+    height: 100px;
+    margin: 0%;
+    padding: 0;
+    background-color: whitesmoke;
+}
+
+.container {
+    position: absolute;
+    margin: auto;
+    top: 10%;
+    left: 35%;
+
+    /*justify-content: flex-start;
+    align-content: center;*/
+}
+
+.results-container {
+    position: absolute;
+    top: 55%;
+    left: 25%;
+    right: 25%;
+    overflow: hidden;
+    object-fit: contain;
+    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.requested {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*.more {
+    background-color: salmon;
+    color: black;
+}*/
