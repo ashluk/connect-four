@@ -3,7 +3,7 @@
     $(".submit").on("click", function () {
         var userInput = $("input").val();
         var artistOrAlbum = $("select").val();
-        //console.log("user-data", userInput, "artistOrAlbum", artistOrAlbum);
+        var nextUrl;
         $.ajax({
             method: "GET",
             url: "https://spicedify.herokuapp.com/spotify",
@@ -13,8 +13,8 @@
                 type: artistOrAlbum, //query and type are the property names because that is what SPOTIFY requests in their API documentation
             },
             success: function (response) {
-                response = response.artists || response.albums; //this gives us the artist obhect inside the albums object
-                console.log("response", response);
+                response = response.artists || response.albums;
+                //this gives us the artist object inside the albums object
                 var resultsHtml = "";
                 var requestHtml = "";
                 var requestFor = $(".requested");
@@ -24,29 +24,18 @@
                     requestFor = "RESULTS FOR " + userInput;
                 }
                 requestHtml += "<div>" + requestFor + "</div>";
+                //this is where we need to use the handlebars logic
                 $(".requested").html(requestHtml);
-                //console.log("why do i exist", requestHtml);
+
+                //this acceses the items property of the object returned by spotify
                 for (var i = 0; i < response.items.length; i++) {
                     var defaultImage = "nophotoplaceholder.jpg";
-                    //this accesses the items property of the obhect returned by spotify
                     if (response.items[i].images.length > 0) {
                         defaultImage = response.items[i].images[0].url;
                     }
-
-                    //EXTERNAL URLS NOT WORKING
-
-                    /* for (
-                        var j = 0;
-                        j < response.items.external_urls.spotify.length;
-                        j++
-                    )
-                        var url = response.items[j].external_urls[0].spotify;**/
-
-                    var url = "http://spiced.spaced"; //set to spiced to text the anchor tags
-
                     resultsHtml +=
                         "<a href=" +
-                        url +
+                        response.items[i].external_urls.spotify +
                         ">" +
                         "<div>" +
                         response.items[i].name +
@@ -59,16 +48,43 @@
                 }
                 $(".results-container").html(resultsHtml);
 
-                var nextUrl =
+                //CHECKING FOR NEXT PAGE...the reason that we have the && is that it checks if the response if null then the code never runs
+                nextUrl =
                     response.next &&
                     response.next.replace(
-                        //the reason that we have the && is that it checks if the response if null then the code never runs
                         "api.spotify.com/v1/search",
                         "spicedify.herokuapp.com/spotify"
                     );
-                console.log("NEXT", nextUrl);
-
+                //IF NEXTURL HAS A VALUE -- CHECK IF THE INDEX OF INFINITE SCROLL IS GREATER THAT -1. THIS MEANS THAT IT DOES HAVE INFINITE SCROLL IN THE QUERY TAG
                 if (nextUrl != null) {
+                    if (location.search.indexOf("?scroll=infinite") > -1);
+                    console.log("we want to do infinite scroll now");
+                    //1st number we need is how far have we scrolled
+                    console.log("how far we scrolled", $(window).scrollTop());
+                    //2nd number we need is the height of the browser
+                    console.log("height of the screen", $(window).height());
+                    //3rd number we need is the height of the page
+                    console.log("height of the screen", $(document).height());
+
+                    function infiniteCheck() {
+                        console.log("checking infinite");
+                        console.log($(window).scrollTop());
+                        console.log($(window).height());
+                        console.log($(document).height());
+
+                        var reachedBottom =
+                            $(window).scrollTop() + $(window).height() >=
+                            $(document).height() - 300;
+                        console.log("reachedbottom", reachedBottom);
+
+                        if (reachedBottom) {
+                            //make call to get more results
+                        } else {
+                            setTimeout(infiniteCheck, 1000);
+                        }
+                    }
+                    infiniteCheck();
+
                     $(".more").toggle();
                     $(".more").on("click", function () {
                         $.ajax({
@@ -89,7 +105,8 @@
                                     }
                                     resultsHtml += //wrap this div in an a tag and give the div in the url
                                         "<a href=" +
-                                        url +
+                                        response.items[i].external_urls
+                                            .spotify +
                                         ">" +
                                         "<div>" +
                                         response.items[i].name +
