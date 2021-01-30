@@ -1,12 +1,12 @@
-body {
+/*body {
     position: relative; /*justify-content: center;
-    flex-direction: row;*/
+    flex-direction: row;
 
-    height: 100px;
+    height: 100%;
     margin: 0%;
     padding: 0;
     background-color: whitesmoke;
-}
+}*/
 
 .container {
     position: absolute;
@@ -35,7 +35,8 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/*.more {
+.more {
+    visibility: hidden;
     background-color: salmon;
     color: black;
-}*/
+}

@@ -14,6 +14,11 @@
             },
             success: function (response) {
                 response = response.artists || response.albums;
+                if (response.next != null) {
+                   /* $(".more").css({ visibility: "visible" });
+                } else {
+                    $(".more").css({ visibility: "hidden" });
+                }*/
                 //this gives us the artist object inside the albums object
                 var resultsHtml = "";
                 var requestHtml = "";
@@ -55,6 +60,7 @@
                         "api.spotify.com/v1/search",
                         "spicedify.herokuapp.com/spotify"
                     );
+
                 //IF NEXTURL HAS A VALUE -- CHECK IF THE INDEX OF INFINITE SCROLL IS GREATER THAT -1. THIS MEANS THAT IT DOES HAVE INFINITE SCROLL IN THE QUERY TAG
                 if (nextUrl != null) {
                     if (location.search.indexOf("?scroll=infinite") > -1);
@@ -84,43 +90,39 @@
                         }
                     }
                     infiniteCheck();
-
-                    $(".more").toggle();
-                    $(".more").on("click", function () {
-                        $.ajax({
-                            url: nextUrl,
-                            success: function (response) {
-                                response = response.artists || response.albums;
-                                var resultsHtml = "";
-                                for (
-                                    var i = 0;
-                                    i < response.items.length;
-                                    i++
-                                ) {
-                                    var defaultImage = "nophotoplaceholder.jpg";
-                                    //this accesses the items property of the obhect returned by spotify
-                                    if (response.items[i].images.length > 0) {
-                                        defaultImage =
-                                            response.items[i].images[0].url;
-                                    }
-                                    resultsHtml += //wrap this div in an a tag and give the div in the url
-                                        "<a href=" +
-                                        response.items[i].external_urls
-                                            .spotify +
-                                        ">" +
-                                        "<div>" +
-                                        response.items[i].name +
-                                        "</div>" +
-                                        '<img src="' +
-                                        defaultImage +
-                                        '"/>' +
-                                        "</a>";
-                                }
-                                $(".results-container").html(resultsHtml);
-                            },
-                        });
-                    });
                 }
+
+                $(".more").toggle();
+
+                $(".more").on("click", function () {
+                    $.ajax({
+                        url: nextUrl,
+                        success: function (response) {
+                            response = response.artists || response.albums;
+                            var resultsHtml = "";
+                            for (var i = 0; i < response.items.length; i++) {
+                                var defaultImage = "nophotoplaceholder.jpg";
+                                //this accesses the items property of the obhect returned by spotify
+                                if (response.items[i].images.length > 0) {
+                                    defaultImage =
+                                        response.items[i].images[0].url;
+                                }
+                                resultsHtml += //wrap this div in an a tag and give the div in the url
+                                    "<a href=" +
+                                    response.items[i].external_urls.spotify +
+                                    ">" +
+                                    "<div>" +
+                                    response.items[i].name +
+                                    "</div>" +
+                                    '<img src="' +
+                                    defaultImage +
+                                    '"/>' +
+                                    "</a>";
+                            }
+                            $(".results-container").html(resultsHtml);
+                        },
+                    });
+                });
             },
         });
     });
