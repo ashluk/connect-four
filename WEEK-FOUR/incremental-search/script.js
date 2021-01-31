@@ -81,28 +81,30 @@
         $("input").val($(event.target).text()); //this is setting the value of the input to just the text info of the event target
         $(".results").html("");
     });
+
     //******KEYDOWN EVENTS */
 
-    $("body").keydown(".country", function (e) {
+    $("input").keydown(".country", function (e) {
         var arrow = { enter: 13, up: 38, down: 40 };
         var matchResults = $("p");
-        var highlightResults = [];
+        // var highlightResults = [];
 
         for (var h = 0; h < matchResults.length; h++) {
-            highlightResults.push(matchResults[h]);
+            // highlightResults.push(matchResults[h]);
+            console.log("matchResults:", matchResults.eq(h));
         }
-        console.log("highlightresults:", highlightResults[0]);
 
         switch (e.which) {
             case arrow.up:
                 if (!matchResults.hasClass("highlight")) {
-                    highlightResults[3].css("background", "yellow");
+                    //$("p").eq(3).addClass("highlight");
+                    $("p").last().addClass("highlight");
                 }
                 break;
 
             case arrow.down:
                 if (!matchResults.hasClass("highlight")) {
-                    highlightResults[0].addClass("highlight");
+                    $("p").eq(0).addClass("highlight");
                 }
                 break;
 
@@ -118,6 +120,7 @@
     $("input").focus(function () {});
 
     //***********BLUR
+    $("body").on("mousedown", "blur", function (event) {});
 })([
     "Afghanistan",
     "Albania",

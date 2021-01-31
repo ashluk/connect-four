@@ -56,7 +56,7 @@ div {
     height: 50px;
     background-color: rgb(247, 239, 238);
     color: black;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
     font-weight: lighter;
     font-size: 15px;
 }
