@@ -90,4 +90,35 @@
         }
         return resultsHtml;
     }
+    console.log("what is", location.search.indexOf("scroll=infinite"));
+    if (location.search.indexOf("scroll=infinite") > -1) {
+        console.log("we want to do infinite scroll now");
+        // 1st number we need is how far have we scrolled
+        console.log("how far have we scrolled: ", $(window).scrollTop());
+
+        // 2nd number is the height of the browser
+        console.log("height of screen", $(window).height());
+
+        // 3rd number we need is how high is the entire page
+        console.log("height of page", $(document).height());
+
+        function infiniteCheck() {
+            console.log("checking infinite");
+            console.log($(window).scrollTop());
+            console.log($(window).height());
+            console.log($(document).height());
+
+            var reachedBottom =
+                $(window).scrollTop() + $(window).height() >=
+                $(document).height() - 300;
+
+            console.log("reachedBottom: ", reachedBottom);
+            if (reachedBottom) {
+                makeAjaxRequest(nextUrl, true);
+            } else {
+                setTimeout(infiniteCheck, 1000);
+            }
+        }
+        infiniteCheck();
+    }
 })();

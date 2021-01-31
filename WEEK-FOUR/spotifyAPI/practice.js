@@ -4,11 +4,30 @@
     var artistOrAlbum;
     var nextUrl = "";
 
+    /*Handlebars.templates = Handlebars.templates || {};
+
+    var templates = document.querySelectorAll(
+        'script[type="text/x-handlebars-template"]'
+    );
+
+    Array.prototype.slice.call(templates).forEach(function (script) {
+        Handlebars.templates[script.id] = Handlebars.compile(script.innerHTML);
+    });*/
+
     $(".submit").on("click", function () {
         userInput = $("input").val();
         artistOrAlbum = $("select").val();
         makeAjaxRequest("https://spicedify.herokuapp.com/spotify");
     });
+
+    $(document).on("keypress", function (e) {
+        if (e.which == 13) {
+            userInput = $("input").val();
+            artistOrAlbum = $("select").val();
+            makeAjaxRequest("https://spicedify.herokuapp.com/spotify");
+        }
+    });
+
     $(".more").on("click", function () {
         makeAjaxRequest(nextUrl, true);
     });
@@ -29,12 +48,16 @@
                 var requestHtml = "";
                 var requestFor = $(".requested");
                 if (response.items.length == 0) {
-                    requestFor = "no results";
+                    requestFor = "NO RESULTS";
                 } else {
-                    requestFor = "RESULTS FOR " + userInput;
+                    requestFor = "Results for... " + userInput;
                 }
                 requestHtml += "<div>" + requestFor + "</div>";
                 //this is where we need to use the handlebars logic
+                /* $(".results-container").html(
+                    Handlebars.templates.spotifyresults(requestHtml)
+                );*/
+
                 $(".requested").html(requestHtml);
 
                 var resultsHtml = generateHtml(response.items);
@@ -44,7 +67,6 @@
                 } else {
                     $(".results-container").html(resultsHtml);
                 }
-
                 //CHECKING FOR NEXT PAGE...the reason that we have the && is that it checks if the response if null then the code never runs
                 nextUrl =
                     response.next &&
@@ -56,42 +78,37 @@
                     $(".more").css({ visibility: "visible" });
                 } else {
                     $(".more").css({ visibility: "hidden" });
+                    return;
                 }
+                //IF NEXTURL HAS A VALUE -- CHECK IF THE INDEX OF INFINITE SCROLL IS GREATER THAT -1. THIS MEANS THAT IT DOES HAVE INFINITE SCROLL IN THE QUERY TAG
 
-                if (location.search.indexOf("?scroll=infinite") > -1) {
-                    // console.log("we want to do infinite scroll now");
-                    //1st number we need is how far have we scrolled
-                    // console.log("how far we scrolled", $(window).scrollTop());
-                    //2nd number we need is the height of the browser
-                    //  console.log("height of the screen", $(window).height());
-                    //3rd number we need is the height of the page
-                    // console.log("height of the screen", $(document).height());
+                if (nextUrl != null) {
+                    if (location.search.indexOf("?scroll=infinite") > -1) {
+                        //1st number we need is how far have we scrolled
+                        // console.log("how far we scrolled", $(window).scrollTop());
+                        //2nd number we need is the height of the browser
+                        //  console.log("height of the screen", $(window).height());
+                        //3rd number we need is the height of the page
+                        // console.log("height of the screen", $(document).height());
 
-                    function infiniteCheck() {
-                        /*console.log("checking infinite");
-                        console.log($(window).scrollTop());
-                        console.log($(window).height());
-                        console.log($(document).height());*/
+                        function infiniteCheck() {
+                            var reachedBottom =
+                                $(window).scrollTop() + $(window).height() >=
+                                $(document).height() - 300;
 
-                        var reachedBottom =
-                            $(window).scrollTop() + $(window).height() >=
-                            $(document).height() - 300;
-                        console.log("reachedbottom", reachedBottom);
-
-                        if (reachedBottom) {
-                            makeAjaxRequest(
-                                userInput,
-                                artistOrAlbum,
-                                nextUrl,
-                                true
-                            );
-                        } else {
-                            setTimeout(infiniteCheck, 1000);
+                            if (reachedBottom && moreButtonClicked) {
+                                console.log("i reached the bottom");
+                                $(".more").css({
+                                    visibility: "hidden",
+                                });
+                                makeAjaxRequest(nextUrl, true);
+                            } else {
+                                setTimeout(infiniteCheck, 100);
+                            }
                         }
+                        infiniteCheck();
                     }
-                    infiniteCheck();
                 }
-                //$(".more").toggle();
             },
         });
     }
@@ -111,12 +128,16 @@
                 "<div>" +
                 items[i].name +
                 "</div>" +
+                "</a>" +
+                "<a href=" +
+                items[i].external_urls.spotify +
+                ">" +
                 '<img src="' +
                 defaultImage +
                 '"/>' +
                 "</a>";
         }
-        $(".results-container").html(resultsHtml);
+        //$(".results-container").html(resultsHtml);
         return resultsHtml;
     }
     /*$.ajax({
@@ -146,9 +167,6 @@
             $(".results-container").html(resultsHtml);
         },
     });*/
-
-    //IF NEXTURL HAS A VALUE -- CHECK IF THE INDEX OF INFINITE SCROLL IS GREATER THAT -1. THIS MEANS THAT IT DOES HAVE INFINITE SCROLL IN THE QUERY TAG
-    // if (nextUrl != null) {
 
     // }
     //$(".results-container").html(resultsHtml);

@@ -1,42 +1,62 @@
-/*body {
-    position: relative; /*justify-content: center;
-    flex-direction: row;
-
-    height: 100%;
-    margin: 0%;
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
     padding: 0;
-    background-color: whitesmoke;
-}*/
+    background-color: rgb(26, 24, 24);
+}
 
 .container {
-    position: absolute;
-    margin: auto;
-    top: 10%;
-    left: 35%;
+    top: 100px;
+    color: whitesmoke;
+}
 
-    /*justify-content: flex-start;
-    align-content: center;*/
+a {
+    text-decoration: none;
+    color: whitesmoke;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-weight: bolder;
+    font-size: 40px;
+    font-variant-caps: all-small-caps;
+    margin: 10px;
 }
 
 .results-container {
-    position: absolute;
-    top: 55%;
-    left: 25%;
-    right: 25%;
+    align-content: center;
     overflow: hidden;
-    object-fit: contain;
+    /*object-fit: contain
+    ;*/
+    flex-grow: 1;
+    flex-shrink: -3;
     margin: auto;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: medium;
+    padding: 10px;
+    font-size: 30px;
 }
-
+img {
+    width: 300px;
+    height: 300px;
+    outline: rgb(253, 230, 230);
+    outline-width: 3px;
+    outline-style: solid;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+div {
+    text-align: center;
+}
 .requested {
+    margin-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .more {
     visibility: hidden;
-    background-color: salmon;
+    width: 300px;
+    height: 50px;
+    background-color: rgb(247, 239, 238);
     color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+    font-weight: lighter;
+    font-size: 15px;
 }
