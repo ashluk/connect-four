@@ -7,61 +7,73 @@ const chalk = require("chalk");
 
 //story object
 const story = {
-    q: "Welcome to The Land Of Wizards! Would you like to play?",
+    q: "Welcome to the Danger Club! Would you like to play a game?",
     answers: {
         yes: {
-            q:
-                "You are alone in a dark forest and facing a fork in the road. Which direction do you turn?",
+            q: "Truth or Dare",
             answers: {
-                left: {
+                dare: {
                     q:
-                        "There's a scary wizard! He asks you a tough question. What's 1+1?",
+                        "You have a choice between eating an entire raw onion or running naked through alexanderplatz at noon. Which do you choose? Onion or Naked?",
                     answers: {
-                        2: "congratulations!",
+                        naked: chalk.blue(
+                            "It's going to be -6 tomorrow, have fun!"
+                        ),
+                        onion: chalk.bgGreen(
+                            "Thats one way to keep up your social distancing!"
+                        ),
                     },
                 },
-                right: "This was not the right choice. Goodbye!",
+                truth:
+                    "I don't think you are ready to face the truth..goodbye.",
             },
         },
-        no: "Alright then. Enjoy your day!",
+        no: "Thats too bad...i guess you don't like danger",
     },
+    //onion: "I am disgusted by you...",
 };
 
 function askQuestion(storyObj) {
     rl.question(chalk.magenta(storyObj.q), (answer) => {
-        console.log("what is the value of", story.answers.yes.left);
-
+        //console.log("what is the value of", story.answers.yes.left);
+        // console.log("story answers yes", story.answers.yes);
+        //console.log("story obj answer", storyObj.answers[answer]);
         //this is a conditional and will evaluate truthy or falsey
         if (storyObj.answers[answer]) {
-            //console.log("answer option exists");
-            console.log(
-                "Value of the user's response in our story object is:",
-                storyObj.answers[answer]
-            );
+            //console.log(typeof answer);
+            if (answer == "string") {
+                console.log(story.answers.no);
+                rl.close();
+            }
             if (answer === "yes") {
                 //console.log(storyObj.answers.yes);
-                askQuestion(story.answers.yes);
+                askQuestion(storyObj.answers[answer]);
             }
-            if (answer === "left") {
-                askQuestion(story.answers.yes.left.q);
+            if (answer === "dare") {
+                askQuestion(storyObj.answers[answer]);
             }
-            if (answer === 2) {
-                askQuestion(story.answers[2]);
+            if (answer === "naked") {
+                console.log(storyObj.answers[answer]);
+
                 rl.close();
             }
 
-            //  console.log("answer given", answer);
+            //console.log("answer given", answer);
             if (answer === "no") {
-                console.log(story.answers.no);
+                console.log(storyObj.answers[answer]);
                 rl.close();
             }
-            if (answer === "right") {
-                console.log(story.answers.no);
+            if (answer === "truth") {
+                console.log(chalk.red(storyObj.answers[answer]));
+                rl.close();
+            }
+            if (answer === "onion") {
+                console.log(storyObj.answers[answer]);
                 rl.close();
             }
         } else {
             //this will keep asking the same question again.
-            console.log(chalk.red("you are not making any sense"));
+            console.log(chalk.red("YOU ARE NOT MAKING ANY SENSE"));
             askQuestion(story);
         }
     });
