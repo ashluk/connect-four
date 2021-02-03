@@ -16,29 +16,31 @@ function logSizes(path) {
                     item.isDirectory(),
                     item.isFile()
                 )*/
-                console.log("item 1", item.isFile());
+                //console.log("item 1", item.isFile());
                 if (item.isFile() === true) {
-                    //console.log("directory name", fs.readdir());
+                    //console.log("name here", item.name);
+                    //console.log("newSize", newSize);
 
-                    //fs.statSync();
-                    getSize(path);
+                    const newSize = getSize(path + "/" + item.name);
+                    console.log(path + "/" + item.name + ":" + newSize);
                 } else {
-                    console.log("this is the name", item.name);
-                    //logSizes(path);
+                    //console.log("this is the path", path + "/" + item.name);
+                    logSizes(path + "/" + item.name);
                 }
             });
         }
     });
 }
-//const stats = fs.statSync(__filename);
-//console.log("these are the stats", stats);
-
 function getSize(name) {
     var stats = fs.statSync(name);
     var fileSize = stats.size;
-    console.log("filesize", fileSize);
     return fileSize;
 }
+
+//console.log("this is my file size", fileSize);
+
+//const stats = fs.statSync(__filename);
+//console.log("these are the stats", stats);
 
 /*fs.stat(path, function (err, info) {
     fs.readdir(path, { withFileTypes: true }, function (err, info) {
