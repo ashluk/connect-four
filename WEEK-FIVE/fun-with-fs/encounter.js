@@ -1,5 +1,5 @@
 const fs = require("fs"); //first we need to require fs
-/*//const items = fs.readdirSync(_dirname); //dirname is the full name to the location on your desktop
+//const items = fs.readdirSync(_dirname); //dirname is the full name to the location on your desktop
 //this will give you back an array containing the names of all the stuff in that folder
 const items = fs.readdirSync(__dirname, { withFileTypes: true }); //this returns us an object
 //this object has methods which tell us the file type and name
@@ -27,7 +27,7 @@ fs.readdirSync(__dirname, { withFileTypes: true }, function (err, items) {
     }
 });
 //console.log("done"); //if we want this to be correct and happen after all the file system stuff has been done we need to move this into the callback
-*/
+
 
 ////STAT example
 const stats = fs.statSync(__filename); //this should return us the path to the file we passed to it

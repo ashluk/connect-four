@@ -1,5 +1,4 @@
 const fs = require("fs");
-//const { pathToFileURL } = require("url");
 //const items = fs.readdirSync(__dirname, { withFileTypes: true });
 
 logSizes(__dirname + "/files"); //this is the path to the file folder, we are passing it to log sizes
@@ -9,32 +8,55 @@ function logSizes(path) {
         if (err) {
             console.log("error!");
         } else {
-            console.log("items", items);
-            items.forEach((item) =>
-                console.log(
+            //console.log("items", items);
+            items.forEach((item) => {
+                /*console.log(
                     "second console log",
                     item.name,
                     item.isDirectory(),
                     item.isFile()
-                )
-            );
-            if (items.isFile === true) {
-                fs.statSync();
-            }
-            //logSizes(path);
+                )*/
+                console.log("item 1", item.isFile());
+                if (item.isFile() === true) {
+                    //console.log("directory name", fs.readdir());
+
+                    //fs.statSync();
+                    getSize(item.name);
+                } else {
+                    //console.log("this is the name", item.name);
+                    //logSizes(path);
+                }
+            });
         }
     });
 }
 //const stats = fs.statSync(__filename);
 //console.log("these are the stats", stats);
 
-fs.stat(__filename, function (err, stats) {
+function getSize(name) {
+    var stats = fs.statSync(name);
+    var fileSize = stats.size;
+    console.log("filesize", fileSize);
+    return fileSize;
+}
+
+/*fs.stat(path, function (err, info) {
+    fs.readdir(path, { withFileTypes: true }, function (err, info) {
+        if (err) {
+            console.log(err, "error");
+        } else {
+            console.log("these are stats", info.info.isFile());
+        }
+    });
+});*/
+
+/*fs.stat(__filename, function (err, stats) {
     if (err) {
-        console.log(err, "oops");
+        console.log(err, "error");
     } else {
         console.log("these are stats", stats.stats.isFile());
     }
-});
+});*/
 //loop through the arry this returns and check to see if each item returned is a file or folder
 //if it is a file, log the name of the file and the size
 //if it a file we need to call stat(remember this is going to be asynchronous) -- when the call is complete we will now know the name of the file and the size
