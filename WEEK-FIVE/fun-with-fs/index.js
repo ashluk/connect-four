@@ -21,9 +21,9 @@ function logSizes(path) {
                     //console.log("directory name", fs.readdir());
 
                     //fs.statSync();
-                    getSize(item.name);
+                    getSize(path);
                 } else {
-                    //console.log("this is the name", item.name);
+                    console.log("this is the name", item.name);
                     //logSizes(path);
                 }
             });
