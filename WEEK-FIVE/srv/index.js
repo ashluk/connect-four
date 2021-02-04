@@ -1,5 +1,5 @@
 const http = require("http");
-const fs = require("fs");
+//const fs = require("fs");
 
 const server = http.createServer((request, response) => {
     request.on("error", (err) => console.log(err));
@@ -9,21 +9,21 @@ const server = http.createServer((request, response) => {
     if (request.method == "GET") {
         response.statusCode = 200;
         response.setHeader("content-type", "text/html");
-        requestsText();
-        response.end();
+        // requestsText();
+        response.end(`<!doctype html>
+<html>
+<title>Hello World!</title>
+<p>Hello World!</p>
+</html>`);
 
         return;
     }
     if (request.method == "HEAD") {
         response.statusCode = 200;
         response.setHeader("content-type", "text/html");
-        requestsText();
+        //requestsText();
 
-        response.end(`<!doctype html>
-<html>
-<title>Hello World!</title>
-<p>Hello World!</p>
-</html>`);
+        response.end();
         return;
     }
     /*if (request.url == "/funky") {
@@ -38,14 +38,10 @@ const server = http.createServer((request, response) => {
         request.on("end", () => {
             console.log(body);
             response.statusCode = 301;
-            response.setHeader("content-type", "text/html");
-            requestsText();
+            response.setHeader("Location", "/");
+            // requestsText();
 
-            response.end(
-                `<!doctype html>
-        <title> hiiiii </title>
-        <h1> ${body} </h1>`
-            );
+            response.end();
             return;
         });
     } else {
@@ -55,7 +51,8 @@ const server = http.createServer((request, response) => {
         response.end();
         return;
     }
-    function requestsText() {
+    /*  function requestsText() {
+        // const fileDate = Date();
         fs.appendFile(
             "requests.txt",
             `${request.method} / ${request.url} / ${request.header}
@@ -65,7 +62,7 @@ const server = http.createServer((request, response) => {
                 console.log('The "data to append" was appended to file!');
             }
         );
-    }
+    }*/
 });
 
 server.listen(8080, () => console.log("Im listening!"));
