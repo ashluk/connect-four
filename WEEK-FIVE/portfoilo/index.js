@@ -1,27 +1,29 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
-//const fileType = require("file-type");
 
 const myModule = require("./module.js");
 console.log(
     "project list",
     myModule.projectOverviewList(__dirname + "/projects")
-); //this is how we call the module from within this file
+);
+const newHtml = myModule.newString;
+console.log("thsi si", newHtml);
+//this is how we call the module from within this file
 //const {projectOverviewList} = require('./module'); //this does the same thing
 /////////////////////////////////content type is for dynamically setting the header values -- lower in the code
 const contentType = {
     ".css": "text/css",
     ".html": "text/html",
     ".js": "text/javascript",
-    ".json	": "application/json",
+    ".json": "application/json",
     ".gif": "image/gif",
     ".jpg": "image/jpg",
     ".png": "image/png",
     ".svg": "image/svg+xml",
 };
 //then to access the content type
-contentType[".css"];
+//contentType[".css"];
 
 ////////////////////////////////
 
@@ -58,6 +60,11 @@ http.createServer((req, res) => {
             return res.end();
         }
         if (stats.isDirectory()) {
+            console.log(
+                "Content-Type",
+                `{contentType[path.extname(requestedFilePath)]}`
+            );
+
             console.log("user requested a directory");
             console.log("filepath to project directory:", requestedFilePath);
             if (req.url.endsWith("/")) {
@@ -82,18 +89,25 @@ http.createServer((req, res) => {
                 // remember to set your headers, send your status code and end your response
             }
         } else {
-            console.log("user requested a file:", requestedFilePath);
+            //console.log("user requested a file:", requestedFilePath);
             const stream = fs.createReadStream(__dirname + requestedFilePath);
-            stream.pipe(res);
             // this means we want to stream and pipe the requested file
             // to figure out the correct headers to set
-            /* console.log(
+            /*console.log(
                 "file ext of requested file is:",
                 path.extname(requestedFilePath)
             );*/
+            const ext = path.extname(requestedFilePath);
+            console.log("ext", ext); //this returns the property name(i.e = .css)
 
-            res.setHeader("Content-Type", "text/css");
+            res.setHeader("Content-Type", contentType[ext]);
+            /*console.log(
+                "Content-Type",
+                contentType[path.extname(requestedFilePath)]
+            );*/
+            //res.setHeader("Content-Type", "text/css");
             // CAREFUL YOU WANT TO  MAKE THIS DYNAMIC
+            stream.pipe(res);
         }
         console.log(
             "file ext of this request is",

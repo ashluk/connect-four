@@ -3,17 +3,24 @@ const fs = require("fs");
 module.exports.projectOverviewList = function (path) {
     //console.log("function in another module running");
     const files = fs.readdirSync(path, { withFileTypes: true });
-    const htmlString = "";
-    files.forEach((file) => {
-        const string = "<a href = /" + file.name + "/>" + file.name + "</a>";
+    files.forEach(() => {
+        var htmlString = "";
 
-        /*console.log(
-            "this is my string",
-            "<a href = /" + file.name + "/>" + file.name + "</a>"
-        );*/
+        for (var i = 0; i < files.length; i++) {
+            //console.log("fdilenames", files[i].name);
+            htmlString +=
+                " <a href = /" + files[i].name + "/>" + files[i].name + "</a>";
+        }
+        const newString =
+            "<!doctype html><html><title>Portfolio</title>" +
+            htmlString +
+            "</html>";
+
+        //console.log("htmlString", htmlString);
+        //console.log("NewString", newString);
+
+        return newString;
     });
-    //console.log("my string", htmlString);
-    return htmlString;
 };
 
 //we want to generate html overview list of all projects
