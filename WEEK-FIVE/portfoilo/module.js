@@ -1,17 +1,18 @@
 const fs = require("fs");
 
 module.exports.projectOverviewList = function (path) {
-    console.log("function in another module running");
+    //console.log("function in another module running");
     const files = fs.readdirSync(path, { withFileTypes: true });
-    const htmlString = ` <!doctype html>
-<html>
-<title>Portfolio</title>
-<a href = ${files.url}>${files.name}</a>
-</html>`;
+    const htmlString = "";
     files.forEach((file) => {
-        console.log("these are the files", path + "/" + file.name);
+        const string = "<a href = /" + file.name + "/>" + file.name + "</a>";
+
+        /*console.log(
+            "this is my string",
+            "<a href = /" + file.name + "/>" + file.name + "</a>"
+        );*/
     });
-    console.log;
+    //console.log("my string", htmlString);
     return htmlString;
 };
 
@@ -21,3 +22,8 @@ module.exports.projectOverviewList = function (path) {
 //createHTML string, loop through list of directories that are contained in the project folder
 //for each project that gets returned from readdirSync, we want to add a link to the respective project
 //make a function that returns a complete html string
+/*<!doctype html>
+<html>
+<title>Portfolio</title>
+<a href = /undefined/>undefined</a>
+</html>*/

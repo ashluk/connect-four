@@ -1,12 +1,16 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+//const fileType = require("file-type");
 
 const myModule = require("./module.js");
-console.log(myModule.projectOverviewList()); //this is how we call the module from within this file
+console.log(
+    "project list",
+    myModule.projectOverviewList(__dirname + "/projects")
+); //this is how we call the module from within this file
 //const {projectOverviewList} = require('./module'); //this does the same thing
 /////////////////////////////////content type is for dynamically setting the header values -- lower in the code
-/*const contentType = {
+const contentType = {
     ".css": "text/css",
     ".html": "text/html",
     ".js": "text/javascript",
@@ -17,7 +21,7 @@ console.log(myModule.projectOverviewList()); //this is how we call the module fr
     ".svg": "image/svg+xml",
 };
 //then to access the content type
-contentType['.css.']*/
+contentType[".css"];
 
 ////////////////////////////////
 
@@ -34,11 +38,13 @@ http.createServer((req, res) => {
 
     //this will normalize our path - it generates any type of traversal into its actual path
     //to prevent people from trying to hack
-    const requestedFilePath = path.normalize(__dirname + "projects" + req.url);
+    const requestedFilePath = path.normalize(__dirname + "/projects" + req.url);
     //keep intruders out!
     if (!requestedFilePath.startsWith(`${__dirname}/projects/`)) {
         res.statusCode = 403; //forbidden
         //console.log("what we want", `${__dirname}/projects/`);
+        console.log("requestedpath", requestedFilePath);
+        console.log("what i see", `${__dirname}/projects/`);
         console.log("INTRUDER INCOMING");
         return res.end();
     }
@@ -68,7 +74,7 @@ http.createServer((req, res) => {
                 });
             } else {
                 res.statusCode = 301;
-                res.setHeader("Location", ` ${req.url} + /`);
+                res.setHeader("Location", req.url + "/");
                 return res.end();
 
                 // we simply want to redirect the user to the req.url, but add a slash to it
@@ -81,10 +87,11 @@ http.createServer((req, res) => {
             stream.pipe(res);
             // this means we want to stream and pipe the requested file
             // to figure out the correct headers to set
-            console.log(
+            /* console.log(
                 "file ext of requested file is:",
                 path.extname(requestedFilePath)
-            );
+            );*/
+
             res.setHeader("Content-Type", "text/css");
             // CAREFUL YOU WANT TO  MAKE THIS DYNAMIC
         }
