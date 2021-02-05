@@ -1,0 +1,111 @@
+* {
+    margin: 0%;
+}
+body {
+    background-color: rgb(17, 16, 16);
+}
+.slot {
+    align-self: center;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+}
+.slot:hover {
+    background-color: rgb(59, 57, 57);
+    cursor: pointer;
+}
+.hole {
+    align-self: center;
+
+    height: 60px;
+    width: 60px;
+
+    transform: translate(-30px, -30px);
+    border: 40px solid whitesmoke;
+
+    border-radius: 50%;
+}
+
+#board {
+    display: flex;
+
+    justify-content: center;
+    padding: 5px;
+}
+
+.reset {
+    background-color: rgb(6, 12, 0);
+    height: 30px;
+    width: 100px;
+    color: ghostwhite;
+    border: whitesmoke 3px solid;
+    align-self: center;
+    padding: 3px;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: 25px;
+}
+
+.reset:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    cursor: pointer;
+}
+.flexcontainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.red {
+    visibility: hidden;
+    align-self: flex-start;
+
+    margin-top: 5px;
+    margin-right: 10px;
+    font-size: 80px;
+    text-align: center;
+
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+
+    color: rgb(115, 253, 1);
+}
+
+.yellow {
+    visibility: hidden;
+    margin-top: 5px;
+    margin-left: 10px;
+
+    text-align: center;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+
+    font-size: 80px;
+    color: rgb(159, 159, 219);
+}
+
+.connect {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 1;
+    flex-wrap: nowrap;
+    visibility: visible;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    margin: 20px;
+    align-self: stretch;
+    font-size: 50px;
+    color: rgb(250, 137, 137);
+}
+strong {
+    color: ghostwhite;
+}
+.topRow {
+    display: flex;
+    justify-content: space-evenly;
+    /*margin-bottom: 10px;*/
+}
+
+.player1 {
+    background-color: rgb(115, 253, 1);
+}
+.player2 {
+    background-color: rgb(159, 159, 219);
+}
