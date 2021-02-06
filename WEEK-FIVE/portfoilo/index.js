@@ -90,7 +90,7 @@ http.createServer((req, res) => {
             }
         } else {
             //console.log("user requested a file:", requestedFilePath);
-            const stream = fs.createReadStream(__dirname + requestedFilePath);
+            const stream = fs.createReadStream(requestedFilePath);
             // this means we want to stream and pipe the requested file
             // to figure out the correct headers to set
             /*console.log(
