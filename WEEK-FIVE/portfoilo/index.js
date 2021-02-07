@@ -3,12 +3,12 @@ const fs = require("fs");
 const path = require("path");
 
 const myModule = require("./module.js");
-console.log(
+/*console.log(
     "project list",
     myModule.projectOverviewList(__dirname + "/projects")
-);
-const newHtml = myModule.newString;
-console.log("thsi si", newHtml);
+);*/
+//const newHtml = myModule.newString;
+//console.log("mymodule", myModule.projectOverviewList);
 //this is how we call the module from within this file
 //const {projectOverviewList} = require('./module'); //this does the same thing
 /////////////////////////////////content type is for dynamically setting the header values -- lower in the code
@@ -31,10 +31,53 @@ http.createServer((req, res) => {
     req.on("error", (err) => console.log("err in req", err));
     res.on("error", (err) => console.log("err in res", err));
     console.log("req.url", req.url);
+
     if (req.method != "GET") {
         console.log("not a GET request");
         res.statusCode = 405;
         //we are returning when sending the res end response
+        return res.end();
+    }
+    if (req.url === "/") {
+        ///this means that the user requested the home page localhost:8080/
+        console.log("YESSSS");
+        res.write(
+            `<!DOCTYPE html>
+    <head>
+    <style>
+@font-face {
+    font-family: 'ATC Duel V12';
+    src: url('ATCDuel-V12.woff') format('woff'),
+        url('ATCDuel-V12.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+body {background-color: black;
+    width: 600px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    padding-top: 250px;
+    padding-left: 350px; }
+
+    a    {padding-left: 40px; font-size: 20px; color: whitesmoke; text-align: center;   text-transform: uppercase;
+            font-family: 'ATC Duel V12'; text-decoration: none;}
+    a:hover {
+    color: rgb(226, 58, 58);
+    }
+
+    </style>
+        
+        <title>PORTFOLIO</title>
+    </head>
+    <body>
+    ${myModule.projectOverviewList(__dirname + "/projects")}
+    </body>
+</html>`
+        );
         return res.end();
     }
 
@@ -45,8 +88,8 @@ http.createServer((req, res) => {
     if (!requestedFilePath.startsWith(`${__dirname}/projects/`)) {
         res.statusCode = 403; //forbidden
         //console.log("what we want", `${__dirname}/projects/`);
-        console.log("requestedpath", requestedFilePath);
-        console.log("what i see", `${__dirname}/projects/`);
+        //console.log("requestedpath", requestedFilePath);
+        // console.log("what i see", `${__dirname}/projects/`);
         console.log("INTRUDER INCOMING");
         return res.end();
     }
@@ -118,19 +161,7 @@ http.createServer((req, res) => {
 
 //in order to figure out the correct header to send we need to use path
 //we need to know the file extensions for this
-//res.setHeader("Content-Type", "text/css");
 
 //part two
 //module.js -- check here for notes
 //utilise the res.write and res.end to write the html returned by the module
-
-/*//console.log(
-    //     "user made it here, this means that they made a legit request that fits our criteria"
-    //);
-    console.log(__dirname + "/projects/connect4me/catgif.gif");
-    //reading the data from the image file
-    const stream = fs.createReadStream(
-        __dirname + "projects/connect4me/catgif.gif"
-    );
-    //sending over our data that we READ as a response
-    stream.pipe(res);*/

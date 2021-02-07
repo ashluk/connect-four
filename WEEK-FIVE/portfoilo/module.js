@@ -3,24 +3,19 @@ const fs = require("fs");
 module.exports.projectOverviewList = function (path) {
     //console.log("function in another module running");
     const files = fs.readdirSync(path, { withFileTypes: true });
-    files.forEach(() => {
-        var htmlString = "";
+    var htmlString = "";
+    //files.forEach(() => {
 
-        for (var i = 0; i < files.length; i++) {
-            //console.log("fdilenames", files[i].name);
-            htmlString +=
-                " <a href = /" + files[i].name + "/>" + files[i].name + "</a>";
-        }
-        const newString =
-            "<!doctype html><html><title>Portfolio</title>" +
-            htmlString +
-            "</html>";
+    for (var i = 1; i < files.length; i++) {
+        htmlString +=
+            " <a href = /" + files[i].name + "/>" + files[i].name + "</a>";
+    }
 
-        //console.log("htmlString", htmlString);
-        //console.log("NewString", newString);
+    //console.log("htmlString", htmlString);
+    //console.log("NewString", newString);
 
-        return newString;
-    });
+    return htmlString;
+    //});
 };
 
 //we want to generate html overview list of all projects
@@ -29,8 +24,15 @@ module.exports.projectOverviewList = function (path) {
 //createHTML string, loop through list of directories that are contained in the project folder
 //for each project that gets returned from readdirSync, we want to add a link to the respective project
 //make a function that returns a complete html string
-/*<!doctype html>
-<html>
-<title>Portfolio</title>
-<a href = /undefined/>undefined</a>
+/*<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+        <title>Connect Four</title>
+    </head>
+    <body>
+    ${}
+    </body>
 </html>*/
