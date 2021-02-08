@@ -21,10 +21,14 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
     if (req.method === "GET" && req.url !== "/") {
-        console.log("not the home page", req.url);
-        res.redirect("./cookies");
+        console.log("this is what i want", req.url);
+        if (!req.cookies.authenticated && req.url !== "/cookies") {
+            console.log("this is what i want", req.url);
+            res.redirect("/cookies");
+        } else {
+            next();
+        }
     }
-    next();
 });
 
 app.get("/", (req, res) => {
@@ -36,18 +40,6 @@ app.get("/", (req, res) => {
 
     res.send("<h1>home page</h1>");
 });
-
-app.get("/", (req, res) => {
-    if (req.url !== "/") {
-        console.log("not the home page", req.url);
-        res.redirect("/cookies");
-    }
-});
-
-/*app.get("/about", (req, res) => {
-    console.log(`a ${req.method} request was made to the ${req.url} route`);
-    res.sendFile(__dirname + "/index.html");
-});*/
 
 app.get("/cookies", (req, res) => {
     res.cookie("authenticated", true); //this sets the authenticated cookie to true
@@ -79,12 +71,17 @@ app.post("/cookies", (req, res) => {
             console.log("req.cookies:", req.cookies);
             res.redirect(req.url); //is this how i would reference req url into the redirect?
         } else {
-            res.redirect("./"); //redirects us to home if we dont have cookie
+            res.redirect("/"); //redirects us to home if we dont have cookie
         }
     });
 });
 
 app.listen(8080, () => console.log("server running"));
+
+/*app.get("/about", (req, res) => {
+    console.log(`a ${req.method} request was made to the ${req.url} route`);
+    res.sendFile(__dirname + "/index.html");
+});*/
 
 //create a new get route, a cookie route
 //if a user makes a get request to ANY page, we have to redirect them to a page waring them that they have to accept cookies
