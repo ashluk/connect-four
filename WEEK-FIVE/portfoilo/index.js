@@ -1,6 +1,8 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const cluster = require("cluster");
+console.log("WORKER ID;", cluster.worker.process.pid);
 
 const myModule = require("./module.js");
 /*console.log(
@@ -26,7 +28,14 @@ const contentType = {
 //contentType[".css"];
 
 ////////////////////////////////
-
+if (Math.random() > 0.5) {
+    // basically 50/50 chance
+    throw new Error("oh no, server crashed");
+}
+cluster.on("exit", (worker) => {
+    console.log(`WORKER ${worker.process.pid} DIED!`);
+    cluster.fork();
+});
 http.createServer((req, res) => {
     req.on("error", (err) => console.log("err in req", err));
     res.on("error", (err) => console.log("err in res", err));
