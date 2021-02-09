@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Kitty Carousel",
+        "directory": "kittycarousel"
+    },
+    {
+        "title": "Connect Four",
+        "directory": "connect4me"
+    },
+    {
+        "title": "Stickman",
+        "directory": "stickmanexercise"
+    },
+    {
+        "title": "Spotify Search",
+        "directory": "spotifyAPI"
+    },
+    {
+        "title": "Resizable Panes",
+        "directory": "resizablepanes"
+    },
+    {
+        "title": "Spiced Page",
+        "directory": "Spiced Welcome to the Future"
+    }
+]

@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+}
+
+#kitties {
+    height: 600px;
+    position: relative; /*this has to be relative bc the images are placed in relation to the box*/
+    overflow: hidden; /*this hides the offscreen cats*/
+}
+
+#kitties img {
+    /*this will apply to any images in the kitties div, even if there were divs with children inside the kitties div it would apply to those too*/
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /*this keeps the image proportions!*/
+    transform: translateX(100%);
+    /*this translates(moves)the cats offscreen 100% to the right (-50%)for example will move it 50%to the left*/
+}
+
+#kitties img.onscreen {
+    /*this only targets the images that have the class .onscreen*/
+    transform: translateX(0);
+    transition: transform; /*this states that there will be a transition and not immediate switch, we set the duration below*/
+    transition-duration: 3s;
+}
+
+#kitties img.exit {
+    transform: translateX(-100%); /*this moves the image 100% offscreen left*/
+    transition: transform;
+    transition-duration: 3s;
+}
+
+#dots {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.dot {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border: 3px white solid;
+    margin: 0 10px; /*margin 0 top and bottom and 10px on sides*/
+}
+
+.on {
+    background-color: white;
+}
+
+#kitties img.noAnimationExit {
+    transform: translateX(-100%);
+    transition: transform;
+    transition-duration: 0s;
+}
+#kitties img.noAnimationEnter {
+    transform: translateX(0%);
+    transition: transform;
+    transition-duration: 0s;
+}
