@@ -1,49 +1,45 @@
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
+const basicAuth = require("basic-auth");
 
 //app.get takes 2 arguments, the location where we are listening for the get request, and the callback function
 
-//middleware is used at the top because of the way the code is read
 //this one line reads our data, stores it in a object
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); //this has to come before teh express.static to keep people out who dont have access
 app.use(express.static("./projects"));
-app.use(express.static("./public"));
-
-//this is how we access the info in out public folder. like linking styles sheets.
+//app.use(express.static("./public"));
 
 //this piece of middlewear will log the route for each get request
 app.use((req, res, next) => {
     console.log(`middlewear log: ${req.method} to ${req.url} route`);
-    next(); //we have to call next when we are done letting it know to move on to the next piece of middlewear
+    next();
 });
 
 app.use((req, res, next) => {
-    if (req.method === "GET" && req.url !== "/") {
+    /*if (req.method === "GET" || req.url !== "/") {
         console.log("this is what i want", req.url);
-        if (!req.cookies.authenticated && req.url !== "/cookies") {
-            res.cookie("user", username, { maxAge: 10800 }).send("cookie set");
-            console.log("this is what i want", req.url, res.cookie);
-            res.redirect("/cookies");
-        } else {
-            next();
-        }
+        res.redirect("/cookies");
+        next();*/
+    if (!req.cookies.authenticated && req.url !== "/cookies") {
+        console.log("this is what i want", req.url, res.cookie);
+        res.redirect("/cookies");
+    } else {
+        next();
     }
+    // }
 });
 
 app.get("/", (req, res) => {
     console.log("req.cookies", req.cookies);
     // res.cookie("first-cookie", "Exciting!");
     // res.cookie("authenticated", true);
-    //line below logs the same thing
-    //console.log(`${req.method} request was made to the ${req.url} route`);
 
     res.send("<h1>home page</h1>");
 });
 
 app.get("/cookies", (req, res) => {
-    res.cookie("authenticated", true); //this sets the authenticated cookie to true
     res.send(`<h2>do you like cookies?</h2>
         <form method='POST' style="display: flex; flex-direction: column; justify-content: space-between; width: 40%; height: 50%;">
             
@@ -56,26 +52,17 @@ app.get("/cookies", (req, res) => {
 });
 
 app.post("/cookies", (req, res) => {
-    console.log(`a ${req.method} request was made to the ${req.url} route`);
+    //console.log(`a ${req.method} request was made to the ${req.url} route`);
     console.log("req.body", req.body); //this will now return an object with the values of the post body.
     const { subscribe } = req.body;
 
     if (subscribe) {
-        res.cookie("authenticated", true);
-        //this is where we would set req.cookies
+        res.cookie("authenticated", true); //this sets the authenticated cookie to true        //this is where we would set req.cookies
         res.send(`
         <h1>YOU LIKE COOKIES</h1>`);
     } else {
         res.send(`<h1>YOU HATE COOKIES</h1>`);
     }
-    app.get("/private", (req, res) => {
-        if (req.cookies.authenticated) {
-            console.log("req.cookies:", req.cookies);
-            res.redirect(req.url); //is this how i would reference req url into the redirect?
-        } else {
-            res.redirect("/"); //redirects us to home if we dont have cookie
-        }
-    });
 });
 
 app.listen(8080, () => console.log("server running"));
@@ -98,3 +85,12 @@ app.listen(8080, () => console.log("server running"));
 
 //start with a get route for cookie which will serve a form.
 //app.use for custom middlewear after this -- check the cookies
+
+/*app.get("/private", (req, res) => {
+        if (req.cookies.authenticated) {
+            console.log("req.cookies:", req.cookies);
+            res.redirect(req.url); //is this how i would reference req url into the redirect?
+        } else {
+            res.redirect("/"); //redirects us to home if we dont have cookie
+        }
+    });*/
