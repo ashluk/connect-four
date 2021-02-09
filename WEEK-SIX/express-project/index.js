@@ -23,7 +23,8 @@ app.use((req, res, next) => {
     if (req.method === "GET" && req.url !== "/") {
         console.log("this is what i want", req.url);
         if (!req.cookies.authenticated && req.url !== "/cookies") {
-            console.log("this is what i want", req.url);
+            res.cookie("user", username, { maxAge: 10800 }).send("cookie set");
+            console.log("this is what i want", req.url, res.cookie);
             res.redirect("/cookies");
         } else {
             next();
@@ -55,18 +56,19 @@ app.get("/cookies", (req, res) => {
 });
 
 app.post("/cookies", (req, res) => {
-    //console.log(`a ${req.method} request was made to the ${req.url} route`);
+    console.log(`a ${req.method} request was made to the ${req.url} route`);
     console.log("req.body", req.body); //this will now return an object with the values of the post body.
-    const { agree } = req.body;
+    const { subscribe } = req.body;
 
-    if (agree) {
+    if (subscribe) {
+        res.cookie("authenticated", true);
         //this is where we would set req.cookies
         res.send(`
         <h1>YOU LIKE COOKIES</h1>`);
     } else {
         res.send(`<h1>YOU HATE COOKIES</h1>`);
     }
-    app.get("/??????", (req, res) => {
+    app.get("/private", (req, res) => {
         if (req.cookies.authenticated) {
             console.log("req.cookies:", req.cookies);
             res.redirect(req.url); //is this how i would reference req url into the redirect?
