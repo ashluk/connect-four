@@ -8,22 +8,28 @@ const basicAuth = require("basic-auth");
 //this one line reads our data, stores it in a object
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); //this has to come before teh express.static to keep people out who dont have access
-app.use(express.static("./projects"));
+
 //app.use(express.static("./public"));
 
 //this piece of middlewear will log the route for each get request
 app.use((req, res, next) => {
-    console.log(`middlewear log: ${req.method} to ${req.url} route`);
+    //console.log(`middlewear log: ${req.method} to ${req.url} route`);
     next();
 });
 
+app.get("/", (req, res) => {
+    //console.log("req.cookies", req.cookies);
+    res.send("<h1>home page</h1>");
+});
+
 app.use((req, res, next) => {
-    /*if (req.method === "GET" || req.url !== "/") {
+    //console.log("what i requested", req.url);
+    /*if (req.method === "GET" && req.url !== "/") {
         console.log("this is what i want", req.url);
-        res.redirect("/cookies");
-        next();*/
+    }*/
     if (!req.cookies.authenticated && req.url !== "/cookies") {
         console.log("this is what i want", req.url, res.cookie);
+        res.cookie("url", req.url);
         res.redirect("/cookies");
     } else {
         next();
@@ -31,13 +37,21 @@ app.use((req, res, next) => {
     // }
 });
 
-app.get("/", (req, res) => {
-    console.log("req.cookies", req.cookies);
-    // res.cookie("first-cookie", "Exciting!");
-    // res.cookie("authenticated", true);
+var auth = function (req, res, next) {
+    var creds = basicAuth(req);
+    if (!creds || creds.name != "ash" || creds.pass != "lee") {
+        res.setHeader(
+            "WWW-Authenticate",
+            'Basic realm="Enter your credentials to see this stuff."'
+        );
+        res.sendStatus(401);
+    } else {
+        next();
+    }
+};
+app.use("/spotifyAPI", auth);
 
-    res.send("<h1>home page</h1>");
-});
+app.use(express.static("./projects"));
 
 app.get("/cookies", (req, res) => {
     res.send(`<h2>do you like cookies?</h2>
@@ -58,8 +72,10 @@ app.post("/cookies", (req, res) => {
 
     if (subscribe) {
         res.cookie("authenticated", true); //this sets the authenticated cookie to true        //this is where we would set req.cookies
-        res.send(`
-        <h1>YOU LIKE COOKIES</h1>`);
+        /*res.send(`
+        <h1>YOU LIKE COOKIES</h1>`);*/
+        console.log("stored cookies", req.cookies);
+        res.redirect(req.cookies["url"]);
     } else {
         res.send(`<h1>YOU HATE COOKIES</h1>`);
     }
