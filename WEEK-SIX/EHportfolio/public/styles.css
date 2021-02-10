@@ -58,14 +58,6 @@ img:hover {
     grid-column: 3 / span 2;
 }
 
-img.catpic:hover {
-    outline: black solid 1px;
-    -webkit-filter: invert(100%) !important;
-}
-
-ul {
-    text-align: center;
-}
 h1 {
     position: fixed;
     top: 0px;
@@ -96,6 +88,18 @@ h3 {
     text-transform: uppercase;
     font-weight: 100;
     letter-spacing: -1px;
+}
+.sidenav {
+    /*height: 100%; /* 100% Full-height */
+    width: 200px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    /*z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    /* background-color: rgb(238, 207, 207); /* Black*/
+    /*overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 footer {
     position: fixed;

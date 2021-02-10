@@ -1,26 +1,32 @@
 [
     {
         "title": "Kitty Carousel",
-        "directory": "kittycarousel"
+        "directory": "kittycarousel",
+        "description": "a bunch of cute kitties on a page"
     },
     {
         "title": "Connect Four",
-        "directory": "connect4me"
+        "directory": "connect4me",
+        "description": "a fun game to play with your friends"
     },
     {
         "title": "Stickman",
-        "directory": "stickmanexercise"
+        "directory": "stickmanexercise",
+        "description": "up, down, right, left! he's raving!"
     },
     {
         "title": "Spotify Search",
-        "directory": "spotifyAPI"
+        "directory": "spotifyAPI",
+        "description": "search for your favorite artists, but remember spotify plays do not pay the artists rent(or even coffee for that matter) :)"
     },
     {
         "title": "Resizable Panes",
-        "directory": "resizablepanes"
+        "directory": "resizablepanes",
+        "description": "during lockdown, after lockdown"
     },
     {
         "title": "Spiced Page",
-        "directory": "Spiced Welcome to the Future"
+        "directory": "Spiced Welcome to the Future",
+        "description": "here we are"
     }
 ]
