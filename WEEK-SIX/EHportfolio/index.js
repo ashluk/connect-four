@@ -15,14 +15,17 @@ app.use(express.static("./projects"));
 
 app.get("/projects/:projects", (req, res) => {
     const projects = req.params.projects;
-    console.log("project params", req.param.projects);
-    const selectedProject = projects.find((item) => item.name == projects);
+    console.log("project params", req.params.projects);
+    const selectedProject = myProjects.find(
+        (item) => item.directory == projects
+    );
     if (!selectedProject) {
         return res.sendStatus(404);
     }
-    /*res.render("projects", {
+    res.render("description", {
         myProjects,
-    });*/
+        selectedProject,
+    });
 });
 
 app.get("/about", (req, res) => {
