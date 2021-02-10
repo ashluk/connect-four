@@ -1,11 +1,13 @@
 
       
+<div class='des'>{{selectedProject.description}}</div>
 
+     <div class="sidenav">
+    {{>projList sidenav=true}}
+</div>
+    <!---{{selectedProject.directory}}-->
 
-    
-    {{>projList}}
+       <a href='{{directory}}/{{selectedProject.directory}}/'> <img src="/{{selectedProject.directory}}/screenshot.jpg" class = 'description'> </a>
 
-      {{selectedProject.directory}}
-
-    
+   
 

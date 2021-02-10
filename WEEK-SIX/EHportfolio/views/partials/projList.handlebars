@@ -3,11 +3,22 @@
         
     
         {{#myProjects}} <!--this is how to loop over an array (if its an object we would write #each teachers ) -->
-       <a href= '/projects/{{directory}}/'> 
-        {{#if ../screen}} <img src="/{{directory}}/screenshot.jpg"> {{/if}}  
+       {{#if ../screen}}  <a href= '/projects/{{directory}}/'> 
+        <img src="/{{directory}}/screenshot.jpg"> 
        
        <h2> {{title}} </h2>  
-       </a>
+       </a> {{/if}}  
+       
+        {{#if ../sidenav}}
+      
+           <a href= '/projects/{{directory}}/'> 
+           <h2> {{title}} </h2>  
+           
+</a>
+      
+       {{/if}}  
+
+        
        
       
 {{/myProjects}} 
