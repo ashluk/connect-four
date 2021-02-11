@@ -20,6 +20,7 @@ app.get("/links.json", (req, res) => {
             //getToken(bearerToken);
             //2.make a request for tweets using the token
             getTweets(bearerToken, (err, tweets) => {
+                //console.log("these are my tweets", tweets);
                 //3. filter the tweets we got in step 2
                 const filteredTweets = filterTweets(tweets);
 

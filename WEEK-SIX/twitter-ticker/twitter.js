@@ -50,7 +50,8 @@ module.exports.getToken = function getToken(callbackToken) {
 module.exports.getTweets = function getTweets(bearerToken, callbackTweets) {
     const options = {
         host: "api.twitter.com",
-        path: "/1.1/statuses/user_timeline.json",
+        path:
+            "/1.1/statuses/user_timeline.json?screen_name=residentadvisor&tweet_mode=extended",
         method: "GET",
         headers: {
             Authorization: "Bearer " + bearerToken,
@@ -58,45 +59,42 @@ module.exports.getTweets = function getTweets(bearerToken, callbackTweets) {
     };
     console.log("what are my options", options);
 
-    function reqCallback(request) {
-        if (request.statusCode != 200) {
-            callbackTweets(request.statusCode);
+    function reqCallback(response) {
+        if (response.statusCode != 200) {
+            callbackTweets(response.statusCode);
             return;
         }
         let body = "";
-        request.on("data", (chunk) => {
+        response.on("data", (chunk) => {
             body += chunk;
         });
         response.on("end", () => {
-            let queryString = "screen_name=residentadvisor&tweet_mode=extended";
-            console.log("querystring", queryString);
-            callbackTweets(null, bearerToken);
+            //console.log("myBody", body);
+            let parsedBody = JSON.parse(body);
+            // console.log("parsedBody.name", Object.values(parsedBody));
+            // console.log("parsedBody.url", Object.values(parsedBody));
+
+            //console.log("parsedBody", parsedBody);
+            callbackTweets(null, parsedBody);
         });
     }
-    const newqueryString =
-        options.path + "? screen_name = residentadvisor&tweet_mode = extended";
+
     const req = https.request(options, reqCallback);
     req.end();
-
-    /*function reqcallbackTweets(request) {
-        callbackTweets(request.bearerToken);
-        https.get("/1.1/statuses/user_timeline.json", (req, res) => {
-            let data = "";
-            res.on("data", (chunk) => {
-                data += chunk;
-            });
-
-            console.log("this is my string", data);
-
-            req.end();
-        });
-        let queryString = path + "screen_name=nytimes&tweet_mode=extended";
-        console.log("mystring", queryString);
-    }*/
-    //this function will get tweets from the twitter api
-    //this will accept two parameters -- the bearerToken
 };
 
 module.exports.filterTweets = function filterTweets(tweets) {
+    // console.log("tweets.length", tweets.length);
+    var myTweets = [];
+    let fulltext = tweets[i].full_text;
+
+    for (var i = 0; i < tweets.length; i++) {
+        console.log("fulltext", fulltext);
+        if (tweets[i].entities.urls > 1 || tweets[i].entities.urls <= 0) {
+            //how do i remove these urls?
+        }
+        return tweets[i].entities.urls;
+    }
+    return fulltext;
     //this function will clean up(filter) out tweet response from the twitter API
 };
