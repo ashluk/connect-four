@@ -6,6 +6,7 @@ var linkWidth = linksJQ.eq(0).outerWidth();
 var requestId;
 
 $.ajax({
+    name: "",
     url: "/links.json",
     method: "GET",
     success: function (textData) {
@@ -14,7 +15,9 @@ $.ajax({
             //console.log("url avaiable", textData[i].url); //this is going to log the value of urls in response
             var text = textData[i].text;
             var url = textData[i].url;
-            myUrls += "<a href=" + url + ">" + " " + text + "</a>";
+            var name = textData[i].name;
+            myUrls +=
+                "<a href=" + url + ">" + " " + name + ": " + text + "</a>";
             //console.log("these are my urls", myUrls);
         }
 

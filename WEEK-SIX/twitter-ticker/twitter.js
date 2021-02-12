@@ -6,7 +6,7 @@
 const { twitterKey, twitterSecret } = require("./secrets");
 
 const https = require("https");
-const queryString = require("querystring");
+//const queryString = require("querystring");
 
 module.exports.getToken = function getToken(callbackToken) {
     //https response will take time to complete to we are calling it once it has values
@@ -47,11 +47,15 @@ module.exports.getToken = function getToken(callbackToken) {
     req.end("grant_type=client_credentials");
 };
 
-module.exports.getTweets = function getTweets(bearerToken, callbackTweets) {
+module.exports.getTweets = function getTweets(
+    bearerToken,
+    handle,
+    callbackTweets
+) {
     const options = {
         host: "api.twitter.com",
-        path:
-            "/1.1/statuses/user_timeline.json?screen_name=residentadvisor&tweet_mode=extended",
+        path: `/1.1/statuses/user_timeline.json?screen_name=${handle}&tweet_mode=extended`,
+        // "/1.1/statuses/user_timeline.json?screen_name=residentadvisor&tweet_mode=extended",
         method: "GET",
         headers: {
             Authorization: "Bearer " + bearerToken,
@@ -84,17 +88,25 @@ module.exports.getTweets = function getTweets(bearerToken, callbackTweets) {
 };
 
 module.exports.filterTweets = function filterTweets(tweets) {
-    // console.log("tweets.length", tweets.length);
     var myTweets = [];
-    let fulltext = tweets[i].full_text;
 
     for (var i = 0; i < tweets.length; i++) {
-        console.log("fulltext", fulltext);
-        if (tweets[i].entities.urls > 1 || tweets[i].entities.urls <= 0) {
-            //how do i remove these urls?
-        }
-        return tweets[i].entities.urls;
+        let fulltext = tweets[i].full_text;
+        let tweetUrl = tweets[i].entities_urls;
+        let twitterName = tweets[i].user.name;
+        //let media = tweets[i].entities.media;
+        /* var newArray = myTweets.filter(function (value) {
+            if (tweetUrl[i] == 1 && media[i] == undefined) {
+                return value;
+            }
+        });*/
+        // console.log("this is the new array", newArray);
+        //push properties to repicate the JSON file
+        myTweets.push({
+            name: twitterName,
+            text: fulltext,
+            url: tweetUrl,
+        });
     }
-    return fulltext;
-    //this function will clean up(filter) out tweet response from the twitter API
+    return myTweets;
 };
