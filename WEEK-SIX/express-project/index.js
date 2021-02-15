@@ -101,12 +101,3 @@ app.listen(8080, () => console.log("server running"));
 
 //start with a get route for cookie which will serve a form.
 //app.use for custom middlewear after this -- check the cookies
-
-/*app.get("/private", (req, res) => {
-        if (req.cookies.authenticated) {
-            console.log("req.cookies:", req.cookies);
-            res.redirect(req.url); //is this how i would reference req url into the redirect?
-        } else {
-            res.redirect("/"); //redirects us to home if we dont have cookie
-        }
-    });*/

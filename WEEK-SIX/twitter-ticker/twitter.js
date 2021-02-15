@@ -92,21 +92,20 @@ module.exports.filterTweets = function filterTweets(tweets) {
 
     for (var i = 0; i < tweets.length; i++) {
         let fulltext = tweets[i].full_text;
-        let tweetUrl = tweets[i].entities_urls;
+        //let tweetUrl = tweets[i].entities.urls[0].url;
         let twitterName = tweets[i].user.name;
         //let media = tweets[i].entities.media;
-        /* var newArray = myTweets.filter(function (value) {
-            if (tweetUrl[i] == 1 && media[i] == undefined) {
-                return value;
-            }
-        });*/
+
+        if (tweets[i].entities.urls.length == 1 && !tweets[i].entities.media) {
+            myTweets.push({
+                name: twitterName,
+                text: fulltext,
+                url: tweets[i].entities.urls[0].url,
+            });
+        }
+
         // console.log("this is the new array", newArray);
         //push properties to repicate the JSON file
-        myTweets.push({
-            name: twitterName,
-            text: fulltext,
-            url: tweetUrl,
-        });
     }
     return myTweets;
 };
