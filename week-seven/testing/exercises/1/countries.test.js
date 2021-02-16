@@ -2,7 +2,7 @@ const countries = require("./countries");
 const { find } = require("./find");
 
 test("empty string returns empty array", () => {
-    const result = find([]);
+    const result = countries.find([]);
     expect(result).toBe([]);
 });
 
@@ -13,7 +13,7 @@ test("the string contains no more than four matches ", () => {
 
 test("the search is case insenensitive", () => {
     const result = countries.toLowerCase;
-    expect(result).toBe("x");
+    expect(result).toEqual("x");
 });
 
 test("no matching countries ", () => {
